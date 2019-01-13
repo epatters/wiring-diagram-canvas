@@ -1,0 +1,24 @@
+{
+  "name": "flow-graph-canvas",
+  "version": "0.1.0",
+  "description": "Flow graphs in HTML canvas",
+  "main": "index.js",
+  "author": "Evan Patterson",
+  "license": "Apache-2.0",
+  "private": true,
+  "peerDependencies": {
+    "konva": "^2.6.0",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0",
+    "react-konva": "^16.7.1"
+  },
+  "devDependencies": {
+    "@types/react": "^16.7.18",
+    "@types/react-dom": "^16.0.11",
+    "konva": "^2.6.0",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0",
+    "react-konva": "^16.7.1",
+    "typescript": "^3.2.2"
+  }
+}
