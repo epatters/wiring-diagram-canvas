@@ -2,6 +2,7 @@
 .vscode
 
 # JavaScript
+bundle.js
 build/
 node_modules/
 npm-debug.log
