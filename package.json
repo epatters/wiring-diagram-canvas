@@ -8,15 +8,18 @@
   "private": true,
   "peerDependencies": {
     "konva": "^2.6.0",
+    "lodash": "^4.17.11",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "react-konva": "^16.7.1"
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.119",
     "@types/react": "^16.7.18",
     "@types/react-dom": "^16.0.11",
     "awesome-typescript-loader": "^5.2.1",
     "konva": "^2.6.0",
+    "lodash": "^4.17.11",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "react-konva": "^16.7.1",
