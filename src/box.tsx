@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as Konva from 'konva';
 import { KonvaNodeProps, Group, Rect, Label, Tag, Text } from 'react-konva';
 
-import * as Style from '../style/canvas.json';
+import * as style from '../style/canvas.json';
 import { Port } from './port';
 
 
@@ -38,7 +38,7 @@ export class Box extends React.Component<BoxProps,BoxState> {
     */
     const textWidth = new Konva.Text({
       text: props.label,
-      fontSize: Style.boxFontSize
+      fontSize: style.box.fontSize
     }).getTextWidth();
 
     return (
@@ -46,9 +46,9 @@ export class Box extends React.Component<BoxProps,BoxState> {
         <Rect x={0} y={0}
           width={width} height={height}
           cornerRadius={5}
-          fill={Style.boxBaseColor}
-          stroke={this.state.hovering ? Style.strokeHighlightColor : Style.strokeColor}
-          strokeWidth={Style.strokeWidth}
+          fill={style.box.baseColor}
+          stroke={this.state.hovering ? style.stroke.highlightColor : style.stroke.color}
+          strokeWidth={style.stroke.width}
           onMouseEnter={evt => {
             // Move to top on hover to ensure tooltip not occluded.
             evt.target.findAncestors('Group').map(group => group.moveToTop());
@@ -66,12 +66,12 @@ export class Box extends React.Component<BoxProps,BoxState> {
             x={width} y={(i+1) * outputPortSep}
           />
         )}
-        <Label x={width/2} y={height + Style.labelPadding}
-          offsetX={textWidth/2 + Style.labelPadding} >
+        <Label x={width/2} y={height + style.label.padding}
+          offsetX={textWidth/2 + style.label.padding} >
           <Tag cornerRadius={5}
-            fill={Style.labelBaseColor} opacity={Style.labelOpacity} />
-          <Text text={props.label} fontSize={Style.boxFontSize}
-            fill={Style.labelTextColor} padding={Style.labelPadding} />
+            fill={style.label.baseColor} opacity={style.label.opacity} />
+          <Text text={props.label} fontSize={style.box.fontSize}
+            fill={style.label.textColor} padding={style.label.padding} />
         </Label>
       </Group>
     );

@@ -3,7 +3,7 @@ import * as Konva from 'konva';
 import { KonvaNodeProps, Group, Path, Label, Tag, Text } from 'react-konva';
 import * as d3 from 'd3-path';
 
-import * as Style from '../style/canvas.json';
+import * as style from '../style/canvas.json';
 
 
 interface WireProps extends Konva.NodeConfig, KonvaNodeProps {
@@ -64,11 +64,11 @@ export class Wire extends React.Component<WireProps,WireState> {
     // Construct SVG path data.
     const delta = {x: end.x - start.x, y: end.y - start.y};
     let path = d3.path();
-    path.moveTo(Style.portRadius, 0);
+    path.moveTo(style.port.radius, 0);
     path.bezierCurveTo(
       delta.x/2, 0,
       delta.x/2, delta.y,
-      delta.x - Style.portRadius, delta.y
+      delta.x - style.port.radius, delta.y
     );
 
     this.setState({ x: start.x, y: start.y, pathData: path.toString() });
@@ -85,15 +85,15 @@ export class Wire extends React.Component<WireProps,WireState> {
         <Path 
           data={this.state.pathData}
           ref={ref => {this.path = ref}}
-          stroke={this.state.hovering ? Style.strokeHighlightColor : Style.strokeColor}
-          strokeWidth={Style.strokeWidth}
+          stroke={this.state.hovering ? style.stroke.highlightColor : style.stroke.color}
+          strokeWidth={style.stroke.width}
         />
         {/* Invisible path with wider stroke, to make hovering easier */}
         <Path
           data={this.state.pathData}
           opacity={0}
           stroke="white"
-          strokeWidth={3*Style.strokeWidth}
+          strokeWidth={3*style.stroke.width}
           onMouseEnter={evt => {
             // Move to top on hover to ensure tooltip not occluded.
             evt.target.findAncestors('Group').map(group => group.moveToTop());
@@ -102,13 +102,13 @@ export class Wire extends React.Component<WireProps,WireState> {
           onMouseLeave={() => this.setState({hovering: false})}
         />
         <Label
-          x={labelPos !== null ? labelPos.x + 3*Style.strokeWidth : 0}
-          y={labelPos !== null ? labelPos.y + 3*Style.strokeWidth : 0}
+          x={labelPos !== null ? labelPos.x + 3*style.stroke.width : 0}
+          y={labelPos !== null ? labelPos.y + 3*style.stroke.width : 0}
           visible={this.state.hovering} >
           <Tag cornerRadius={5}
-            fill={Style.labelBaseColor} opacity={Style.labelOpacity} />
-          <Text text={this.props.label} fontSize={Style.wireFontSize}
-            fill={Style.labelTextColor} padding={Style.labelPadding} />
+            fill={style.label.baseColor} opacity={style.label.opacity} />
+          <Text text={this.props.label} fontSize={style.wire.fontSize}
+            fill={style.label.textColor} padding={style.label.padding} />
         </Label>
       </Group>
     )
