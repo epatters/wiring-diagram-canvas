@@ -36,8 +36,8 @@ export class Port extends React.Component<PortProps,PortState> {
           visible={this.state.hovering} >
           <Tag cornerRadius={5}
             fill={Style.labelBaseColor} opacity={Style.labelOpacity} />
-          <Text text={this.props.label} 
-            fill={Style.labelTextColor} padding={5} />
+          <Text text={this.props.label} fontSize={Style.portFontSize}
+            fill={Style.labelTextColor} padding={Style.labelPadding} />
         </Label>
       </Group>
     );

@@ -11,7 +11,8 @@ class App extends React.Component {
     return (
       <Stage width={window.innerWidth} height={window.innerHeight}>
         <Layer>
-          <Box x={0} y={0} width={75} height={75} draggable
+          <Box x={200} y={200} width={60} height={60} draggable
+            label="fit supervised model"
             inputPorts={["model", "predictors", "response"]}
             outputPorts={["fitted model"]}
           />
