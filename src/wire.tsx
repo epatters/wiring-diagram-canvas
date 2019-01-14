@@ -61,8 +61,8 @@ export class Wire extends React.Component<WireProps,WireState> {
     
     // Construct SVG path data.
     let path = d3.path();
-    path.moveTo(0, 0);
-    path.lineTo(end.x - start.x, end.y - start.y);
+    path.moveTo(Style.portRadius, 0);
+    path.lineTo(end.x - start.x - Style.portRadius, end.y - start.y);
 
     this.setState({ x: start.x, y: start.y, pathData: path.toString() });
   }
