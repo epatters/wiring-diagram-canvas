@@ -3,6 +3,7 @@
     "outDir": "./build/",
     "sourceMap": false,
     "noImplicitAny": true,
+    "resolveJsonModule": true,
     "module": "commonjs",
     "target": "es6",
     "jsx": "react"
