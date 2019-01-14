@@ -1,4 +1,5 @@
 module.exports = {
+  mode: "development",
   entry: {
     "simple-flow": "./examples/simple-flow/index.tsx",
   },

@@ -6,6 +6,7 @@ import * as Style from '../style/canvas.json';
 
 
 interface PortProps extends Konva.ContainerConfig, KonvaNodeProps {
+  /* Port label, shown as tooltip on hover. */
   label: string;
 }
 
@@ -22,7 +23,7 @@ export class Port extends React.Component<PortProps,PortState> {
 
   render() {
     return (
-      <Group name="port" {...this.props}>
+      <Group {...this.props}>
         <Circle 
           radius={Style.portRadius}
           fill={Style.portBaseColor}

@@ -7,7 +7,9 @@ import { Port } from './port';
 
 
 interface BoxProps extends Konva.ContainerConfig, KonvaNodeProps {
+  /* Box label, shown below the box. */
   label: string;
+
   inputPorts: string[];
   outputPorts: string[];
 }
@@ -40,7 +42,7 @@ export class Box extends React.Component<BoxProps,BoxState> {
     }).getTextWidth();
 
     return (
-      <Group name="box" {...props}>
+      <Group {...props}>
         <Rect x={0} y={0}
           width={width} height={height}
           cornerRadius={5}
@@ -52,13 +54,13 @@ export class Box extends React.Component<BoxProps,BoxState> {
         />
         {props.inputPorts.map((label, i) =>
           // Move port to top on hover to ensure tooltip not occluded.
-          <Port label={label}
+          <Port key={i} name={`${props.name}:in${i+1}`} label={label}
             x={0} y={(i+1) * inputPortSep}
             onMouseEnter={evt => evt.currentTarget.moveToTop()}
           />
         )}
         {props.outputPorts.map((label, i) =>
-          <Port label={label}
+          <Port key={i} name={`${props.name}:out${i+1}`} label={label}
             x={width} y={(i+1) * outputPortSep}
             onMouseEnter={evt => evt.currentTarget.moveToTop()}
           />
