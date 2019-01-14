@@ -1,33 +1,32 @@
-import * as _ from 'lodash';
 import * as React from 'react';
 import * as Konva from 'konva';
-import { Group, Rect, Circle } from 'react-konva';
+import { KonvaNodeProps, Group, Rect } from 'react-konva';
 
 import * as Style from '../style/canvas.json';
 import { Port } from './port';
 
 
-interface BoxProps extends Konva.NodeConfig {
-  nin: number;
-  nout: number;
+interface BoxProps extends Konva.ContainerConfig, KonvaNodeProps {
+  inputPorts: string[];
+  outputPorts: string[];
 }
 
 interface BoxState {
-  highlight: boolean;
+  hovering: boolean;
 }
 
 export class Box extends React.Component<BoxProps,BoxState> {
 
   constructor(props: BoxProps) {
     super(props);
-    this.state = {highlight: false};
+    this.state = {hovering: false};
   }
 
   render() {
     const props = this.props;
     const offset = Style.portRadius + Style.strokeWidth / 2;
-    const inPortSep = props.height / (props.nin + 1);
-    const outPortSep = props.height / (props.nout + 1);
+    const inputPortSep = props.height / (props.inputPorts.length + 1);
+    const outputPortSep = props.height / (props.outputPorts.length + 1);
     return (
       <Group name="box" {...props}>
         <Rect
@@ -35,16 +34,23 @@ export class Box extends React.Component<BoxProps,BoxState> {
           width={props.width-2*offset} height={props.height-2*offset}
           cornerRadius={5}
           fill={Style.boxBaseColor}
-          stroke={this.state.highlight ? Style.strokeHighlightColor : Style.strokeColor}
+          stroke={this.state.hovering ? Style.strokeHighlightColor : Style.strokeColor}
           strokeWidth={Style.strokeWidth}
-          onMouseEnter={() => this.setState({highlight: true})}
-          onMouseLeave={() => this.setState({highlight: false})}
+          onMouseEnter={() => this.setState({hovering: true})}
+          onMouseLeave={() => this.setState({hovering: false})}
         />
-        {_.range(props.nin).map(i =>
-          <Port x={offset} y={(i+1) * inPortSep} />
+        {props.inputPorts.map((label, i) =>
+          // Move port to top on hover to ensure tooltip not occluded.
+          <Port label={label}
+            x={offset} y={(i+1) * inputPortSep}
+            onMouseEnter={evt => evt.currentTarget.moveToTop()}
+          />
         )}
-        {_.range(props.nout).map(i =>
-          <Port x={props.width-offset} y={(i+1) * outPortSep} />
+        {props.outputPorts.map((label, i) =>
+          <Port label={label}
+            x={props.width-offset} y={(i+1) * outputPortSep}
+            onMouseEnter={evt => evt.currentTarget.moveToTop()}
+          />
         )}
       </Group>
     );

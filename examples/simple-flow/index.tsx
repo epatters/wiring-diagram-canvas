@@ -11,7 +11,10 @@ class App extends React.Component {
     return (
       <Stage width={window.innerWidth} height={window.innerHeight}>
         <Layer>
-          <Box x={0} y={0} width={75} height={75} nin={3} nout={1} draggable />
+          <Box x={0} y={0} width={75} height={75} draggable
+            inputPorts={["model", "predictors", "response"]}
+            outputPorts={["fitted model"]}
+          />
         </Layer>
       </Stage>
     );

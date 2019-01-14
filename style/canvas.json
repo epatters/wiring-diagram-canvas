@@ -2,6 +2,9 @@
   "boxBaseColor": "#eeeeee",
   "portBaseColor": "white",
   "portRadius": 4,
+  "labelBaseColor": "black",
+  "labelOpacity": 0.75,
+  "labelTextColor": "white",
   "strokeColor": "black",
   "strokeHighlightColor": "#0169D9",
   "strokeWidth": 1.5
