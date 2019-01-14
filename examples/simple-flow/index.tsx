@@ -2,8 +2,7 @@ import * as React from 'react';
 import { render } from 'react-dom';
 import { Stage, Layer } from 'react-konva';
 
-import { Box } from '../../src/box';
-import { Wire } from '../../src/wire';
+import { Box, Wire } from '../../src';
 
 
 class App extends React.Component {
