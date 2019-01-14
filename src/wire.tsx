@@ -4,24 +4,10 @@ import { KonvaNodeProps, Group, Path, Label, Tag, Text } from 'react-konva';
 import * as d3 from 'd3-path';
 
 import * as style from '../style/canvas.json';
+import { WireSchema } from './schema';
 
 
-interface WireProps extends Konva.NodeConfig, KonvaNodeProps {
-  /* ID of source box. */
-  source: string;
-
-  /* Number of source port. */
-  sourcePort: number;
-
-  /* ID of target box. */
-  target: string;
-
-  /* Number of target port. */
-  targetPort: number;
-
-  /* Wire label, shown as tooltip on hover. */
-  label: string;
-}
+interface WireProps extends WireSchema, Konva.NodeConfig, KonvaNodeProps {}
 
 interface WireState {
   x: number;

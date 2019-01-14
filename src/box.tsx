@@ -4,15 +4,10 @@ import { KonvaNodeProps, Group, Rect, Label, Tag, Text } from 'react-konva';
 
 import * as style from '../style/canvas.json';
 import { Port } from './port';
+import { BoxSchema } from './schema';
 
 
-interface BoxProps extends Konva.ContainerConfig, KonvaNodeProps {
-  /* Box label, shown below the box. */
-  label: string;
-
-  inputPorts: string[];
-  outputPorts: string[];
-}
+interface BoxProps extends BoxSchema, Konva.ContainerConfig, KonvaNodeProps {}
 
 interface BoxState {
   hovering: boolean;
@@ -27,8 +22,8 @@ export class Box extends React.Component<BoxProps,BoxState> {
 
   render() {
     const { width, height, ...props } = this.props;
-    const inputPortSep = height / (props.inputPorts.length + 1);
-    const outputPortSep = height / (props.outputPorts.length + 1);
+    const inputPortSep = height / (props.inputs.length + 1);
+    const outputPortSep = height / (props.outputs.length + 1);
 
     /* Precalculate width of text label to center label via x offset.
 
@@ -56,13 +51,13 @@ export class Box extends React.Component<BoxProps,BoxState> {
           }}
           onMouseLeave={() => this.setState({hovering: false})}
         />
-        {props.inputPorts.map((label, i) =>
-          <Port key={i} name={`${props.name}:in${i+1}`} label={label}
+        {props.inputs.map((port, i) =>
+          <Port key={i} name={`${props.name}:in${i+1}`} label={port.label}
             x={0} y={(i+1) * inputPortSep}
           />
         )}
-        {props.outputPorts.map((label, i) =>
-          <Port key={i} name={`${props.name}:out${i+1}`} label={label}
+        {props.outputs.map((port, i) =>
+          <Port key={i} name={`${props.name}:out${i+1}`} label={port.label}
             x={width} y={(i+1) * outputPortSep}
           />
         )}

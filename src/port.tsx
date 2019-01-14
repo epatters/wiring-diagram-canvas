@@ -3,12 +3,10 @@ import * as Konva from 'konva';
 import { KonvaNodeProps, Group, Circle, Label, Tag, Text } from 'react-konva';
 
 import * as style from '../style/canvas.json';
+import { PortSchema } from './schema';
 
 
-interface PortProps extends Konva.ContainerConfig, KonvaNodeProps {
-  /* Port label, shown as tooltip on hover. */
-  label: string;
-}
+interface PortProps extends PortSchema, Konva.ContainerConfig, KonvaNodeProps {}
 
 interface PortState {
   hovering: boolean;

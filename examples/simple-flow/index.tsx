@@ -12,23 +12,23 @@ class App extends React.Component {
         <Layer>
           <Box name="lm" x={100} y={100} width={40} height={40}
             label="linear model"
-            inputPorts={[]}
-            outputPorts={["model"]}
+            inputs={[]}
+            outputs={[{label: "model"}]}
           />
           <Box name="read" x={100} y={300} width={60} height={60}
             label="read data"
-            inputPorts={[]}
-            outputPorts={["predictors", "response"]}
+            inputs={[]}
+            outputs={[{label: "predictors"}, {label: "response"}]}
           />
           <Box name="fit" x={250} y={200} width={60} height={60}
             label="fit supervised model"
-            inputPorts={["model", "predictors", "response"]}
-            outputPorts={["fitted model"]}
+            inputs={[{label: "model"}, {label: "predictors"}, {label: "response"}]}
+            outputs={[{label: "fitted model"}]}
           />
           <Box name="predict" x={400} y={300} width={60} height={60}
             label="predict"
-            inputPorts={["model", "predictors"]}
-            outputPorts={["response"]}
+            inputs={[{label: "model"}, {label: "predictors"}]}
+            outputs={[{label: "response"}]}
           />
           <Wire source="lm" sourcePort={1} target="fit" targetPort={1}
             label="linear model"
