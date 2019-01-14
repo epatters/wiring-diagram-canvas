@@ -11,18 +11,40 @@ class App extends React.Component {
     return (
       <Stage width={window.innerWidth} height={window.innerHeight}>
         <Layer>
-          <Box name="fit" x={200} y={200} width={60} height={60}
+          <Box name="lm" x={100} y={100} width={40} height={40}
+            label="linear model"
+            inputPorts={[]}
+            outputPorts={["model"]}
+          />
+          <Box name="read" x={100} y={300} width={60} height={60}
+            label="read data"
+            inputPorts={[]}
+            outputPorts={["predictors", "response"]}
+          />
+          <Box name="fit" x={250} y={200} width={60} height={60}
             label="fit supervised model"
             inputPorts={["model", "predictors", "response"]}
             outputPorts={["fitted model"]}
           />
-          <Box name="predict" x={400} y={200} width={60} height={60}
+          <Box name="predict" x={400} y={300} width={60} height={60}
             label="predict"
             inputPorts={["model", "predictors"]}
             outputPorts={["response"]}
           />
-          <Wire source="fit" sourcePort={1} target="predict" targetPort={1} 
+          <Wire source="lm" sourcePort={1} target="fit" targetPort={1}
             label="linear model"
+          />
+          <Wire source="read" sourcePort={1} target="fit" targetPort={2}
+            label="table"
+          />
+          <Wire source="read" sourcePort={2} target="fit" targetPort={3}
+            label="column"
+          />
+          <Wire source="fit" sourcePort={1} target="predict" targetPort={1}
+            label="linear model"
+          />
+          <Wire source="read" sourcePort={1} target="predict" targetPort={2}
+            label="table"
           />
         </Layer>
       </Stage>

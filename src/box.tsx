@@ -42,7 +42,7 @@ export class Box extends React.Component<BoxProps,BoxState> {
     }).getTextWidth();
 
     return (
-      <Group {...props}>
+      <Group {...props} offsetX={width/2} offsetY={height/2}>
         <Rect x={0} y={0}
           width={width} height={height}
           cornerRadius={5}
