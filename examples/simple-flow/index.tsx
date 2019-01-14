@@ -11,7 +11,7 @@ class App extends React.Component {
     return (
       <Stage width={window.innerWidth} height={window.innerHeight}>
         <Layer>
-          <Box x={0} y={0} width={100} height={100} nin={3} nout={2} draggable />
+          <Box x={0} y={0} width={75} height={75} nin={3} nout={1} draggable />
         </Layer>
       </Stage>
     );
