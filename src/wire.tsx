@@ -76,16 +76,23 @@ export class Wire extends React.Component<WireProps,WireState> {
           ref={ref => {this.path = ref}}
           stroke={this.state.hovering ? Style.strokeHighlightColor : Style.strokeColor}
           strokeWidth={Style.strokeWidth}
+        />
+        {/* Invisible path with wider stroke, to make hovering easier */}
+        <Path
+          data={this.state.pathData}
+          opacity={0}
+          stroke="white"
+          strokeWidth={3*Style.strokeWidth}
           onMouseEnter={() => this.setState({hovering: true})}
           onMouseLeave={() => this.setState({hovering: false})}
         />
         <Label
-          x={labelPos !== null ? labelPos.x : 0}
-          y={labelPos !== null ? labelPos.y : 0}
+          x={labelPos !== null ? labelPos.x + 3*Style.strokeWidth : 0}
+          y={labelPos !== null ? labelPos.y + 3*Style.strokeWidth : 0}
           visible={this.state.hovering} >
           <Tag cornerRadius={5}
             fill={Style.labelBaseColor} opacity={Style.labelOpacity} />
-          <Text text={this.props.label} fontSize={Style.portFontSize}
+          <Text text={this.props.label} fontSize={Style.wireFontSize}
             fill={Style.labelTextColor} padding={Style.labelPadding} />
         </Label>
       </Group>

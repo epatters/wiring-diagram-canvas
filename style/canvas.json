@@ -1,13 +1,18 @@
 {
   "boxBaseColor": "#eeeeee",
   "boxFontSize": 14,
+
   "portBaseColor": "white",
   "portFontSize": 12,
   "portRadius": 4,
+  
+  "wireFontSize": 12,
+
   "labelBaseColor": "black",
   "labelOpacity": 0.75,
   "labelPadding": 5,
   "labelTextColor": "white",
+
   "strokeColor": "black",
   "strokeHighlightColor": "#0169D9",
   "strokeWidth": 1.5
