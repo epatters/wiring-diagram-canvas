@@ -39,25 +39,27 @@ export class Wire extends React.Component<WireProps,WireState> {
     this.state = {x: 0, y: 0, pathData: "", hovering: false};
   }
 
-  componentDidMount() {
-    this.updatePath();
-  }
+  /* Get point on path.
 
+  Argument is a number between 0 (beginning of path) and 1 (end of path).
+  */
   getPathPoint(rel: number): Konva.Vector2d {
-    if (this.path === null)
-      return null;
     const path = this.path as any;
+    if (path === null)
+      return null;
     return path.getPointAtLength(rel * path.getLength());
   }
 
+  /* Update path based on positions of source and target ports.
+  */
   updatePath() {
     // Get positions of source and target ports, relative to the layer.
-    const props = this.props;
+    const { source, sourcePort, target, targetPort } = this.props;
     const layer = this.path.getLayer();
-    const sourcePort = layer.findOne(`.${props.source}:out${props.sourcePort}`);
-    const targetPort = layer.findOne(`.${props.target}:in${props.targetPort}`);
-    const start = sourcePort.getAbsolutePosition(layer);
-    const end = targetPort.getAbsolutePosition(layer);
+    const sourceNode = layer.findOne(`.${source}:out${sourcePort}`);
+    const targetNode = layer.findOne(`.${target}:in${targetPort}`);
+    const start = sourceNode.getAbsolutePosition(layer);
+    const end = targetNode.getAbsolutePosition(layer);
     
     // Construct SVG path data.
     const delta = {x: end.x - start.x, y: end.y - start.y};
@@ -70,6 +72,10 @@ export class Wire extends React.Component<WireProps,WireState> {
     );
 
     this.setState({ x: start.x, y: start.y, pathData: path.toString() });
+  }
+
+  componentDidMount() {
+    this.updatePath();
   }
 
   render() {
@@ -88,7 +94,11 @@ export class Wire extends React.Component<WireProps,WireState> {
           opacity={0}
           stroke="white"
           strokeWidth={3*Style.strokeWidth}
-          onMouseEnter={() => this.setState({hovering: true})}
+          onMouseEnter={evt => {
+            // Move to top on hover to ensure tooltip not occluded.
+            evt.target.findAncestors('Group').map(group => group.moveToTop());
+            this.setState({hovering: true});
+          }}
           onMouseLeave={() => this.setState({hovering: false})}
         />
         <Label

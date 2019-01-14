@@ -29,7 +29,11 @@ export class Port extends React.Component<PortProps,PortState> {
           fill={Style.portBaseColor}
           stroke={this.state.hovering ? Style.strokeHighlightColor : Style.strokeColor}
           strokeWidth={Style.strokeWidth}
-          onMouseEnter={() => this.setState({hovering: true})}
+          onMouseEnter={evt => {
+            // Move to top on hover to ensure tooltip not occluded.
+            evt.target.findAncestors('Group').map(group => group.moveToTop());
+            this.setState({hovering: true});
+          }}
           onMouseLeave={() => this.setState({hovering: false})}
         />
         <Label
