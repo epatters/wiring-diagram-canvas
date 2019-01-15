@@ -1,4 +1,4 @@
-export * from './schema';
+export * from './interfaces/graph';
 export * from './components/box';
 export * from './components/port';
 export * from './components/wire';

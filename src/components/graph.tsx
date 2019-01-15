@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as Konva from 'konva';
 import { KonvaNodeProps, Group } from 'react-konva';
 
-import { GraphSchema } from '../schema';
+import { GraphSchema } from '../interfaces/graph';
 import { Box } from './box';
 import { Wire } from './wire';
 

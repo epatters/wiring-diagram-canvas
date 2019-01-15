@@ -4,7 +4,7 @@ import { KonvaNodeProps, Group, Path, Label, Tag, Text } from 'react-konva';
 import * as d3 from 'd3-path';
 
 import * as style from '../../style/canvas.json';
-import { WireSchema } from '../schema';
+import { WireSchema } from '../interfaces/graph';
 import { moveAncestorsToTop } from './util';
 
 

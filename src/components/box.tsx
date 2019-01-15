@@ -3,7 +3,7 @@ import * as Konva from 'konva';
 import { KonvaNodeProps, Group, Rect, Label, Tag, Text } from 'react-konva';
 
 import * as style from '../../style/canvas.json';
-import { BoxSchema } from '../schema';
+import { BoxSchema } from '../interfaces/graph';
 import { Port } from './port';
 import { moveAncestorsToTop } from './util';
 
