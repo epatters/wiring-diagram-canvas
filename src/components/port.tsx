@@ -4,6 +4,7 @@ import { KonvaNodeProps, Group, Circle, Label, Tag, Text } from 'react-konva';
 
 import * as style from '../../style/canvas.json';
 import { PortSchema } from '../schema';
+import { moveAncestorsToTop } from './util';
 
 
 interface PortProps extends PortSchema, Konva.ContainerConfig, KonvaNodeProps {}
@@ -28,8 +29,7 @@ export class Port extends React.Component<PortProps,PortState> {
           stroke={this.state.hovering ? style.stroke.highlightColor : style.stroke.color}
           strokeWidth={style.stroke.width}
           onMouseEnter={evt => {
-            // Move to top on hover to ensure tooltip not occluded.
-            evt.target.findAncestors('Group').map(group => group.moveToTop());
+            moveAncestorsToTop(evt.target, 'Group');
             this.setState({hovering: true});
           }}
           onMouseLeave={() => this.setState({hovering: false})}

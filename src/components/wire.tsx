@@ -5,6 +5,7 @@ import * as d3 from 'd3-path';
 
 import * as style from '../../style/canvas.json';
 import { WireSchema } from '../schema';
+import { moveAncestorsToTop } from './util';
 
 
 interface WireProps extends WireSchema, Konva.NodeConfig, KonvaNodeProps {}
@@ -81,8 +82,7 @@ export class Wire extends React.Component<WireProps,WireState> {
           stroke="white"
           strokeWidth={3*style.stroke.width}
           onMouseEnter={evt => {
-            // Move to top on hover to ensure tooltip not occluded.
-            evt.target.findAncestors('Group').map(group => group.moveToTop());
+            moveAncestorsToTop(evt.target, 'Group');
             this.setState({hovering: true});
           }}
           onMouseLeave={() => this.setState({hovering: false})}
