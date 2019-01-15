@@ -2,8 +2,8 @@ import * as React from 'react';
 import * as Konva from 'konva';
 import { KonvaNodeProps, Group, Circle, Label, Tag, Text } from 'react-konva';
 
-import * as style from '../style/canvas.json';
-import { PortSchema } from './schema';
+import * as style from '../../style/canvas.json';
+import { PortSchema } from '../schema';
 
 
 interface PortProps extends PortSchema, Konva.ContainerConfig, KonvaNodeProps {}

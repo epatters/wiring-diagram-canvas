@@ -2,9 +2,9 @@ import * as React from 'react';
 import * as Konva from 'konva';
 import { KonvaNodeProps, Group, Rect, Label, Tag, Text } from 'react-konva';
 
-import * as style from '../style/canvas.json';
+import * as style from '../../style/canvas.json';
+import { BoxSchema } from '../schema';
 import { Port } from './port';
-import { BoxSchema } from './schema';
 
 
 interface BoxProps extends BoxSchema, Konva.ContainerConfig, KonvaNodeProps {}
@@ -21,7 +21,7 @@ export class Box extends React.Component<BoxProps,BoxState> {
   }
 
   render() {
-    const { width, height, ...props } = this.props;
+    const { id, width, height, ...props } = this.props;
     const inputPortSep = height / (props.inputs.length + 1);
     const outputPortSep = height / (props.outputs.length + 1);
 
@@ -37,7 +37,7 @@ export class Box extends React.Component<BoxProps,BoxState> {
     }).getTextWidth();
 
     return (
-      <Group {...props} offsetX={width/2} offsetY={height/2}>
+      <Group {...props} name={id} offsetX={width/2} offsetY={height/2}>
         <Rect x={0} y={0}
           width={width} height={height}
           cornerRadius={5}
@@ -52,12 +52,12 @@ export class Box extends React.Component<BoxProps,BoxState> {
           onMouseLeave={() => this.setState({hovering: false})}
         />
         {props.inputs.map((port, i) =>
-          <Port key={i} name={`${props.name}:in${i+1}`} label={port.label}
+          <Port key={i} name={`${id}:in${i+1}`} label={port.label}
             x={0} y={(i+1) * inputPortSep}
           />
         )}
         {props.outputs.map((port, i) =>
-          <Port key={i} name={`${props.name}:out${i+1}`} label={port.label}
+          <Port key={i} name={`${id}:out${i+1}`} label={port.label}
             x={width} y={(i+1) * outputPortSep}
           />
         )}

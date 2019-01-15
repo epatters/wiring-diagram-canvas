@@ -1,0 +1,117 @@
+{
+  "boxes": [
+    {
+      "id": "lm",
+      "label": "linear model",
+      "inputs": [],
+      "outputs": [
+        {
+          "label": "model"
+        }
+      ],
+      "x": 100,
+      "y": 100,
+      "width": 40,
+      "height": 40
+    },
+    {
+      "id": "read",
+      "label": "read data",
+      "inputs": [],
+      "outputs": [
+        {
+          "label": "predictors"
+        },
+        {
+          "label": "response"
+        }
+      ],
+      "x": 100,
+      "y": 300,
+      "width": 60,
+      "height": 60
+    },
+    {
+      "id": "fit",
+      "label": "fit supervised model",
+      "inputs": [
+        {
+          "label": "model"
+        },
+        {
+          "label": "predictors"
+        },
+        {
+          "label": "response"
+        }
+      ],
+      "outputs": [
+        {
+          "label": "fitted model"
+        }
+      ],
+      "x": 250,
+      "y": 200,
+      "width": 60,
+      "height": 60
+    },
+    {
+      "id": "predict",
+      "label": "predict",
+      "inputs": [
+        {
+          "label": "model"
+        },
+        {
+          "label": "predictors"
+        }
+      ],
+      "outputs": [
+        {
+          "label": "response"
+        }
+      ],
+      "x": 400,
+      "y": 300,
+      "width": 60,
+      "height": 60
+    }
+  ],
+  "wires": [
+    {
+      "source": "lm",
+      "sourcePort": 1,
+      "target": "fit",
+      "targetPort": 1,
+      "label": "linear model"
+    },
+    {
+      "source": "read",
+      "sourcePort": 1,
+      "target": "fit",
+      "targetPort": 2,
+      "label": "table"
+    },
+    {
+      "source": "read",
+      "sourcePort": 2,
+      "target": "fit",
+      "targetPort": 3,
+      "label": "column"
+    },
+    {
+      "source": "fit",
+      "sourcePort": 1,
+      "target": "predict",
+      "targetPort": 1,
+      "label": "linear model"
+    },
+    {
+      "source": "read",
+      "sourcePort": 1,
+      "target": "predict",
+      "targetPort": 2,
+      "label": "table"
+    }
+  ]
+}

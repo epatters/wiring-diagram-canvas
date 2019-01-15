@@ -5,6 +5,9 @@ export interface PortSchema {
 }
 
 export interface BoxSchema {
+  /* Box ID, used to identify the box. Must be unique within graph. */
+  id?: string;
+
   /* Box label, shown below the box. */
   label: string;
 
