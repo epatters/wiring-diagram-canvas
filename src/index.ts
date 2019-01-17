@@ -1,5 +1,9 @@
-export * from './interfaces/graph';
-export * from './components/box';
-export * from './components/port';
-export * from './components/wire';
-export * from './components/graph';
+import * as Graph from './interfaces/graph';
+import * as Graphviz from './interfaces/graphviz';
+
+export {
+  Graph,
+  Graphviz,
+};
+
+export * from './components';

@@ -1,56 +1,77 @@
+/* JSON format for flow graphs (wiring diagrams).
+ *
+ * Based on the JSON graph format used in the KIELER project and its successor
+ * ELK (Eclipse Layout Kernel).
+ */
 
-export interface PortSchema {
-  /* Port label, shown as tooltip on hover. */
-  label: string;
+/** A flow graph, aka wiring diagram.
+*/
+export interface FlowGraph extends Box {
+  /** Boxes in flow graph. */
+  children: Box[];
+
+  /** Wires in flow graph. */
+  edges: Wire[];
 }
 
-export interface BoxSchema {
-  /* Box ID, used to identify the box. Must be unique within graph. */
-  id?: string;
+/** Box in a flow graph.
+ */
+export interface Box extends GraphElement {
+  /** Input and output ports of box. */
+  ports: Port[];
 
-  /* Box label, shown below the box. */
-  label: string;
-
-  /* Input ports. */
-  inputs: PortSchema[];
-
-  /* Output ports. */
-  outputs: PortSchema[];
-
-  /* x coordinate of box, with origin at box center. */
+  /** x coordinate of box, with origin at box center. */
   x?: number;
 
-  /* y coordinate of box, with origin at box center. */
+  /** y coordinate of box, with origin at box center. */
   y?: number;
 
-  /* Width of box. */
+  /** Width of box. */
   width?: number;
 
-  /* Height of box. */
+  /** Height of box. */
   height?: number;
 }
 
-export interface WireSchema {
-  /* Wire label, shown as tooltip on hover. */
-  label: string;
-
-  /* ID of source box. */
-  source: string;
-
-  /* Number of source port. */
-  sourcePort: number;
-
-  /* ID of target box. */
-  target: string;
-
-  /* Number of target port. */
-  targetPort: number;
+/** Port attached to a box.
+ */
+export interface Port extends GraphElement {
+  /** Is the port an input port or an output port? */
+  portkind: string; // 'input' | 'output';
 }
 
-export interface GraphSchema {
-  /* Boxes in flow graph. */
-  boxes: BoxSchema[];
+/** Wire between boxes in a flow graph.
+ */
+export interface Wire extends GraphElement {
+  /** ID of source box. */
+  source: string;
 
-  /* Wires in flow graph. */
-  wires: WireSchema[];
+  /** ID of source port. */
+  sourcePort: string;
+
+  /** ID of target box. */
+  target: string;
+
+  /** ID of target port. */
+  targetPort: string;
+}
+
+/** Abstract base interface for elements in a flow graph.
+ */
+interface GraphElement {
+  /** ID of graph element. */
+  id?: string;
+
+  /** Text labels associated with graph element.
+   * 
+   * Currently, we allow elements to have at most one label.
+   */
+  labels?: {
+    text: string;
+  }[];
+
+  /** Arbitrary JSON data associated with graph element. */
+  properties?: {
+    [key: string]: any;
+  };
 }

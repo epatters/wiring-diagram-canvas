@@ -2,18 +2,18 @@ import * as React from 'react';
 import * as Konva from 'konva';
 import { KonvaNodeProps, Group } from 'react-konva';
 
-import { GraphSchema } from '../interfaces/graph';
+import * as Graph from '../interfaces/graph';
 import { Box } from './box';
 import { Wire } from './wire';
 
 
-interface GraphProps extends GraphSchema, Konva.ContainerConfig, KonvaNodeProps {}
+interface FlowGraphProps extends Graph.FlowGraph, Konva.ContainerConfig, KonvaNodeProps {}
 
-export const Graph = (props: GraphProps) => {
+export const FlowGraph = (props: FlowGraphProps) => {
   return (
     <Group>
-      {props.boxes.map((box, i) => <Box key={i} {...box} />)}
-      {props.wires.map((wire, i) => <Wire key={i} {...wire} />)}
+      {props.children.map((box, i) => <Box key={i} {...box} />)}
+      {props.edges.map((wire, i) => <Wire key={i} {...wire} />)}
     </Group>
   );
 };

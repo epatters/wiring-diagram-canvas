@@ -3,11 +3,11 @@ import * as Konva from 'konva';
 import { KonvaNodeProps, Group, Circle, Label, Tag, Text } from 'react-konva';
 
 import * as style from '../../style/canvas.json';
-import { PortSchema } from '../interfaces/graph';
+import * as Graph from '../interfaces/graph';
 import { moveAncestorsToTop } from './util';
 
 
-interface PortProps extends PortSchema, Konva.ContainerConfig, KonvaNodeProps {}
+interface PortProps extends Graph.Port, Konva.ContainerConfig, KonvaNodeProps {}
 
 interface PortState {
   hovering: boolean;
@@ -21,8 +21,10 @@ export class Port extends React.Component<PortProps,PortState> {
   }
 
   render() {
+    const { id, labels, ...props } = this.props;
+    const label = labels && labels.length > 0 ? labels[0].text : id;
     return (
-      <Group {...this.props}>
+      <Group {...props}>
         <Circle 
           radius={style.port.radius}
           fill={style.port.baseColor}
@@ -39,7 +41,7 @@ export class Port extends React.Component<PortProps,PortState> {
           visible={this.state.hovering} >
           <Tag cornerRadius={5}
             fill={style.label.baseColor} opacity={style.label.opacity} />
-          <Text text={this.props.label} fontSize={style.port.fontSize}
+          <Text text={label} fontSize={style.port.fontSize}
             fill={style.label.textColor} padding={style.label.padding} />
         </Label>
       </Group>

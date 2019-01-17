@@ -4,11 +4,11 @@ import { KonvaNodeProps, Group, Path, Label, Tag, Text } from 'react-konva';
 import * as d3 from 'd3-path';
 
 import * as style from '../../style/canvas.json';
-import { WireSchema } from '../interfaces/graph';
+import * as Graph from '../interfaces/graph';
 import { moveAncestorsToTop } from './util';
 
 
-interface WireProps extends WireSchema, Konva.NodeConfig, KonvaNodeProps {}
+interface WireProps extends Graph.Wire, Konva.NodeConfig, KonvaNodeProps {}
 
 interface WireState {
   x: number;
@@ -43,8 +43,8 @@ export class Wire extends React.Component<WireProps,WireState> {
     // Get positions of source and target ports, relative to the layer.
     const { source, sourcePort, target, targetPort } = this.props;
     const layer = this.path.getLayer();
-    const sourceNode = layer.findOne(`.${source}:out${sourcePort}`);
-    const targetNode = layer.findOne(`.${target}:in${targetPort}`);
+    const sourceNode = layer.findOne(`.${source}:${sourcePort}`);
+    const targetNode = layer.findOne(`.${target}:${targetPort}`);
     const start = sourceNode.getAbsolutePosition(layer);
     const end = targetNode.getAbsolutePosition(layer);
     
@@ -66,6 +66,8 @@ export class Wire extends React.Component<WireProps,WireState> {
   }
 
   render() {
+    const { id, labels } = this.props;
+    const label = labels && labels.length > 0 ? labels[0].text : id;
     const labelPos = this.getPathPoint(0.5);
     return (
       <Group x={this.state.x} y={this.state.y}>
@@ -93,7 +95,7 @@ export class Wire extends React.Component<WireProps,WireState> {
           visible={this.state.hovering} >
           <Tag cornerRadius={5}
             fill={style.label.baseColor} opacity={style.label.opacity} />
-          <Text text={this.props.label} fontSize={style.wire.fontSize}
+          <Text text={label} fontSize={style.wire.fontSize}
             fill={style.label.textColor} padding={style.label.padding} />
         </Label>
       </Group>

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { render } from 'react-dom';
 import { Stage, Layer } from 'react-konva';
 
-import { Graph } from '../../src';
+import { FlowGraph } from '../../src';
 import * as flow from './flow.json';
 
 
@@ -11,7 +11,7 @@ class App extends React.Component {
     return (
       <Stage width={window.innerWidth} height={window.innerHeight}>
         <Layer>
-          <Graph {...flow} />
+          <FlowGraph {...flow} />
         </Layer>
       </Stage>
     );

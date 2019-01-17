@@ -1,12 +1,16 @@
 {
-  "boxes": [
+  "id": "root",
+  "ports": [],
+  "children": [
     {
       "id": "lm",
-      "label": "linear model",
-      "inputs": [],
-      "outputs": [
+      "labels": [
+        { "text": "linear model" }
+      ],
+      "ports": [
         {
-          "label": "model"
+          "id": "model",
+          "portkind": "output"
         }
       ],
       "x": 100,
@@ -16,14 +20,17 @@
     },
     {
       "id": "read",
-      "label": "read data",
-      "inputs": [],
-      "outputs": [
+      "labels": [
+        { "text": "read data" }
+      ],
+      "ports": [
         {
-          "label": "predictors"
+          "id": "predictors",
+          "portkind": "output"
         },
         {
-          "label": "response"
+          "id": "response",
+          "portkind": "output"
         }
       ],
       "x": 100,
@@ -33,21 +40,28 @@
     },
     {
       "id": "fit",
-      "label": "fit supervised model",
-      "inputs": [
-        {
-          "label": "model"
-        },
-        {
-          "label": "predictors"
-        },
-        {
-          "label": "response"
-        }
+      "labels": [
+        { "text": "fit supervised model" }
       ],
-      "outputs": [
+      "ports": [
         {
-          "label": "fitted model"
+          "id": "model",
+          "portkind": "input"
+        },
+        {
+          "id": "predictors",
+          "portkind": "input"
+        },
+        {
+          "id": "response",
+          "portkind": "input"
+        },
+        {
+          "id": "fitted",
+          "labels": [
+            { "text": "fitted model" }
+          ],
+          "portkind": "output"
         }
       ],
       "x": 250,
@@ -57,18 +71,18 @@
     },
     {
       "id": "predict",
-      "label": "predict",
-      "inputs": [
+      "ports": [
         {
-          "label": "model"
+          "id": "model",
+          "portkind": "input"
         },
         {
-          "label": "predictors"
-        }
-      ],
-      "outputs": [
+          "id": "predictors",
+          "portkind": "input"
+        },
         {
-          "label": "response"
+          "id": "response",
+          "portkind": "output"
         }
       ],
       "x": 400,
@@ -77,41 +91,51 @@
       "height": 60
     }
   ],
-  "wires": [
+  "edges": [
     {
       "source": "lm",
-      "sourcePort": 1,
+      "sourcePort": "model",
       "target": "fit",
-      "targetPort": 1,
-      "label": "linear model"
+      "targetPort": "model",
+      "labels": [
+        { "text": "linear model" }
+      ]
     },
     {
       "source": "read",
-      "sourcePort": 1,
+      "sourcePort": "predictors",
       "target": "fit",
-      "targetPort": 2,
-      "label": "table"
+      "targetPort": "predictors",
+      "labels": [
+        { "text": "table" }
+      ]
     },
     {
       "source": "read",
-      "sourcePort": 2,
+      "sourcePort": "response",
       "target": "fit",
-      "targetPort": 3,
-      "label": "column"
+      "targetPort": "response",
+      "labels": [
+        { "text": "column" }        
+      ]
     },
     {
       "source": "fit",
-      "sourcePort": 1,
+      "sourcePort": "fitted",
       "target": "predict",
-      "targetPort": 1,
-      "label": "linear model"
+      "targetPort": "model",
+      "labels": [
+        { "text": "linear model" }
+      ]
     },
     {
       "source": "read",
-      "sourcePort": 1,
+      "sourcePort": "predictors",
       "target": "predict",
-      "targetPort": 2,
-      "label": "table"
+      "targetPort": "predictors",
+      "labels": [
+        { "text": "table" }
+      ]
     }
   ]
 }

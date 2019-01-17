@@ -1,15 +1,15 @@
 import * as _ from 'lodash';
 import { Vector2d } from 'konva';
 
-import { GraphSchema, BoxSchema, WireSchema } from './interfaces/graph';
+import * as Graph from './interfaces/graph';
 import * as Graphviz from './interfaces/graphviz';
 
 
 /* Parse graph layout from Graphviz dot output in JSON format.
  */
-export function parseGraphvizLayout(graphviz: Graphviz.Graph): GraphSchema {
-  let boxes: BoxSchema[] = [];
-  let wires: WireSchema[] = [];
+export function parseGraphvizLayout(graphviz: Graphviz.Graph): Graph.FlowGraph {
+  let boxes: Graph.Box[] = [];
+  let wires: Graph.Wire[] = [];
 
   /* Use bounding box to transform coordinates.
 
@@ -38,16 +38,20 @@ export function parseGraphvizLayout(graphviz: Graphviz.Graph): GraphSchema {
       // Omit invisible edges, which are used to tweak the layout in Graphviz.
       continue;
     }
-    wires.push(parseGraphvizEdge(edge, getBox, transformPoint));
+    //wires.push(parseGraphvizEdge(edge, getBox, transformPoint));
   }
   
-  return { boxes, wires };
+  return {
+    ports: [],
+    children: boxes, 
+    edges: wires,
+  };
 }
 
 /* Parse Graphviz node in JSON format.
  */
 function parseGraphvizNode(node: Graphviz.Node,
-    transformPoint: (point: Vector2d) => Vector2d): BoxSchema {
+    transformPoint: (point: Vector2d) => Vector2d): Graph.Box {
   const position = transformPoint(parsePoint(node.pos));
   return {
     /* Confusingly, we assign the Graphviz name to the box ID and vice
@@ -55,7 +59,8 @@ function parseGraphvizNode(node: Graphviz.Node,
        while the user-defined Graphviz IDs need not be.
     */
     id: node.name,
-    name: node.id,
+    ports: [],
+    //name: node.id,
     
     x: position.x,
     y: position.y,
@@ -67,8 +72,8 @@ function parseGraphvizNode(node: Graphviz.Node,
 /* Parse Graphviz edge in JSON format.
  */
 function parseGraphvizEdge(edge: Graphviz.Edge,
-    getBox: (id: number) => BoxSchema,
-    transformPoint: (point: Vector2d) => Vector2d): WireSchema {
+    getBox: (id: number) => Graph.Box,
+    transformPoint: (point: Vector2d) => Vector2d) {
   // TODO.
 }
 

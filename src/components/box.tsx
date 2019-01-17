@@ -3,12 +3,12 @@ import * as Konva from 'konva';
 import { KonvaNodeProps, Group, Rect, Label, Tag, Text } from 'react-konva';
 
 import * as style from '../../style/canvas.json';
-import { BoxSchema } from '../interfaces/graph';
+import * as Graph from '../interfaces/graph';
 import { Port } from './port';
 import { moveAncestorsToTop } from './util';
 
 
-interface BoxProps extends BoxSchema, Konva.ContainerConfig, KonvaNodeProps {}
+interface BoxProps extends Graph.Box, Konva.ContainerConfig, KonvaNodeProps {}
 
 interface BoxState {
   hovering: boolean;
@@ -22,9 +22,12 @@ export class Box extends React.Component<BoxProps,BoxState> {
   }
 
   render() {
-    const { id, width, height, ...props } = this.props;
-    const inputPortSep = height / (props.inputs.length + 1);
-    const outputPortSep = height / (props.outputs.length + 1);
+    const { id, labels, ports, width, height, ...props } = this.props;
+    const label = labels && labels.length > 0 ? labels[0].text : id;
+    const inputPorts = ports.filter(port => port.portkind === "input");
+    const outputPorts = ports.filter(port => port.portkind === "output");
+    const inputPortSep = height / (inputPorts.length + 1);
+    const outputPortSep = height / (outputPorts.length + 1);
 
     /* Precalculate width of text label to center label via x offset.
 
@@ -33,7 +36,7 @@ export class Box extends React.Component<BoxProps,BoxState> {
     https://github.com/konvajs/react-konva/issues/6
     */
     const textWidth = new Konva.Text({
-      text: props.label,
+      text: label,
       fontSize: style.box.fontSize
     }).getTextWidth();
 
@@ -51,13 +54,13 @@ export class Box extends React.Component<BoxProps,BoxState> {
           }}
           onMouseLeave={() => this.setState({hovering: false})}
         />
-        {props.inputs.map((port, i) =>
-          <Port key={i} name={`${id}:in${i+1}`} label={port.label}
+        {inputPorts.map((port, i) =>
+          <Port {...port} key={i} name={`${id}:${port.id}`}
             x={0} y={(i+1) * inputPortSep}
           />
         )}
-        {props.outputs.map((port, i) =>
-          <Port key={i} name={`${id}:out${i+1}`} label={port.label}
+        {outputPorts.map((port, i) =>
+          <Port {...port} key={i} name={`${id}:${port.id}`}
             x={width} y={(i+1) * outputPortSep}
           />
         )}
@@ -65,7 +68,7 @@ export class Box extends React.Component<BoxProps,BoxState> {
           offsetX={textWidth/2 + style.label.padding} >
           <Tag cornerRadius={5}
             fill={style.label.baseColor} opacity={style.label.opacity} />
-          <Text text={props.label} fontSize={style.box.fontSize}
+          <Text text={label} fontSize={style.box.fontSize}
             fill={style.label.textColor} padding={style.label.padding} />
         </Label>
       </Group>
