@@ -1,11 +1,14 @@
 import * as _ from 'lodash';
-import { Vector2d } from 'konva';
 
+import { Point } from './interfaces/graph';
 import * as Graph from './interfaces/graph';
 import * as Graphviz from './interfaces/graphviz';
 
 
-/* Parse graph layout from Graphviz dot output in JSON format.
+/** Parse graph layout from Graphviz dot output in JSON format.
+ *
+ * All information unrelated to layout, such as node and edge labels, is
+ * ignored.
  */
 export function parseGraphvizLayout(graphviz: Graphviz.Graph): Graph.FlowGraph {
   let boxes: Graph.Box[] = [];
@@ -19,7 +22,7 @@ export function parseGraphvizLayout(graphviz: Graphviz.Graph): Graph.FlowGraph {
      numbers in the Graphviz bounding box are always (0,0).
    */
   const bb = parseFloatArray(graphviz.bb);
-  const transformPoint = (point: Vector2d): Vector2d => (
+  const transformPoint = (point: Point): Point => (
     { x: point.x, y: bb[3] - point.y }
   );
 
@@ -38,11 +41,10 @@ export function parseGraphvizLayout(graphviz: Graphviz.Graph): Graph.FlowGraph {
       // Omit invisible edges, which are used to tweak the layout in Graphviz.
       continue;
     }
-    //wires.push(parseGraphvizEdge(edge, getBox, transformPoint));
+    wires.push(parseGraphvizEdge(edge, getBox, transformPoint));
   }
   
   return {
-    ports: [],
     children: boxes, 
     edges: wires,
   };
@@ -51,17 +53,10 @@ export function parseGraphvizLayout(graphviz: Graphviz.Graph): Graph.FlowGraph {
 /* Parse Graphviz node in JSON format.
  */
 function parseGraphvizNode(node: Graphviz.Node,
-    transformPoint: (point: Vector2d) => Vector2d): Graph.Box {
+    transformPoint: (point: Point) => Point): Graph.Box {
   const position = transformPoint(parsePoint(node.pos));
   return {
-    /* Confusingly, we assign the Graphviz name to the box ID and vice
-       versa. The reason is that the Graphviz names are guaranteed to be unique,
-       while the user-defined Graphviz IDs need not be.
-    */
-    id: node.name,
-    ports: [],
-    //name: node.id,
-    
+    id: node.id || node.name,
     x: position.x,
     y: position.y,
     width: _.round(inchesToPoints(parseFloat(node.width)), 3),
@@ -73,8 +68,30 @@ function parseGraphvizNode(node: Graphviz.Node,
  */
 function parseGraphvizEdge(edge: Graphviz.Edge,
     getBox: (id: number) => Graph.Box,
-    transformPoint: (point: Vector2d) => Vector2d) {
-  // TODO.
+    transformPoint: (point: Point) => Point): Graph.Wire {
+  /* Get source and target nodes. */
+  const source = getBox(edge.tail);
+  const target = getBox(edge.head);
+  const wire: Graph.Wire = {
+    id: edge.id,
+    source: source.id,
+    target: target.id,
+  };
+
+  /* Parse source and target points. */
+  const spline = parseSpline(edge.pos).map(transformPoint);
+  const startPoint = spline[0];
+  const endPoint = spline.slice(-1)[0];
+  wire.sourcePoint = {
+    x: _.round(startPoint.x - source.x, 3),
+    y: _.round(startPoint.y - source.y, 3)
+  };
+  wire.targetPoint = {
+    x: _.round(endPoint.x - target.x, 3),
+    y: _.round(endPoint.y - target.y, 3)
+  };
+
+  return wire;
 }
 
 /* Parse array of floats in Graphviz's comma-separated format.
@@ -86,7 +103,7 @@ function parseFloatArray(s: string): number[] {
 /* Parse Graphviz point.
    http://www.graphviz.org/doc/info/attrs.html#k:point
  */
-function parsePoint(s: string): Vector2d {
+function parsePoint(s: string): Point {
   const point = parseFloatArray(s);
   return { x: point[0], y: point[1] }
 }
@@ -94,10 +111,10 @@ function parsePoint(s: string): Vector2d {
 /* Parse Graphviz spline.
    http://www.graphviz.org/doc/info/attrs.html#k:splineType
  */
-function parseSpline(spline: string): Vector2d[] {
-  let points: Vector2d[] = [];
-  let startPoint: Vector2d = null;
-  let endPoint: Vector2d = null;
+function parseSpline(spline: string): Point[] {
+  let points: Point[] = [];
+  let startPoint: Point = null;
+  let endPoint: Point = null;
   
   spline.split(" ").forEach((s) => {
     if (s.startsWith("s,")) {
