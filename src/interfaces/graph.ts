@@ -9,8 +9,9 @@
  * - KEILER's JSON graph format:
  *   https://rtsys.informatik.uni-kiel.de/confluence/display/KIELER/JSON+Graph+Format
  *
- * - ELK's JSON graph format:
+ * - ELK's JSON graph format and coordinate system:
  *   https://www.eclipse.org/elk/documentation/tooldevelopers/graphdatastructure/jsonformat.html
+ *   https://www.eclipse.org/elk/documentation/tooldevelopers/graphdatastructure/coordinatesystem.html
  */
 
 /** A flow graph, aka wiring diagram.
@@ -64,13 +65,16 @@ export interface Wire extends GraphElement {
   /** ID of target port. */
   targetPort?: string;
 
-  /** Source point of wire, relative to center of source box. */
+  /** Source point of wire. */
   sourcePoint?: Point;
 
-  /** Target point of wire, relative to center of target box. */
+  /** Target point of wire. */
   targetPoint?: Point;
 
-  /** Bend points of wire, including source and target points. */
+  /** Bend points of wire, including source and target points.
+   *
+   * The points define a cubic B-spline of overlapping cubic Bezier curves.
+   */
   bendPoints?: Point[];
 }
 

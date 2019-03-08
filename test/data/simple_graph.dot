@@ -1,0 +1,43 @@
+digraph G {
+  graph [fontname="Serif",rankdir="LR"];
+  node [fontname="Serif",shape="none",width="0",height="0",margin="0"];
+  edge [arrowsize="0.5",fontname="Serif"];
+  {
+    graph [rank="source",rankdir="TB"];
+    node [style="invis",shape="none",label="",width="0",height="0.333"];
+    edge [style="invis"];
+    n1p1 -> n1p2;
+  }
+  {
+    graph [rank="sink",rankdir="TB"];
+    node [style="invis",shape="none",label="",width="0",height="0.333"];
+    edge [style="invis"];
+    n2p1 -> n2p2;
+  }
+  n3 [id="n3",comment="g",label=<<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0">
+<TR>
+<TD><TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0"><TR><TD HEIGHT="0" WIDTH="0" PORT="in1"></TD></TR></TABLE></TD>
+<TD BORDER="1" CELLPADDING="4" WIDTH="40" HEIGHT="40"></TD>
+<TD><TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0"><TR><TD HEIGHT="0" WIDTH="0" PORT="out1"></TD></TR></TABLE></TD>
+</TR>
+</TABLE>>];
+  n4 [id="n4",comment="h",label=<<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0">
+<TR>
+<TD><TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0"><TR><TD HEIGHT="0" WIDTH="0"></TD></TR></TABLE></TD>
+<TD BORDER="1" CELLPADDING="4" WIDTH="40" HEIGHT="40"></TD>
+<TD><TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0"><TR><TD HEIGHT="0" WIDTH="0" PORT="out1"></TD></TR></TABLE></TD>
+</TR>
+</TABLE>>];
+  n5 [id="n5",comment="f",label=<<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0">
+<TR>
+<TD><TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0"><TR><TD HEIGHT="0" WIDTH="0" PORT="in1"></TD></TR><TR><TD HEIGHT="0" WIDTH="0" PORT="in2"></TD></TR></TABLE></TD>
+<TD BORDER="1" CELLPADDING="4" WIDTH="40" HEIGHT="40"></TD>
+<TD><TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0"><TR><TD HEIGHT="0" WIDTH="0" PORT="out1"></TD></TR></TABLE></TD>
+</TR>
+</TABLE>>];
+  n1p1:e -> n5:in1:w [id="e1",comment="X"];
+  n1p2:e -> n5:in2:w [id="e2",comment="Y"];
+  n3:out1:e -> n2p1:w [id="e3",comment="Z"];
+  n4:out1:e -> n2p2:w [id="e4",comment="W"];
+  n5:out1:e -> n3:in1:w [id="e5",comment="Z"];
+}

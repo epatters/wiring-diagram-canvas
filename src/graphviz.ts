@@ -60,7 +60,7 @@ function parseGraphvizNode(node: Graphviz.Node,
     x: position.x,
     y: position.y,
     width: _.round(inchesToPoints(parseFloat(node.width)), 3),
-    height: _.round(inchesToPoints(parseFloat(node.height)), 3)
+    height: _.round(inchesToPoints(parseFloat(node.height)), 3),
   };
 }
 
@@ -69,29 +69,21 @@ function parseGraphvizNode(node: Graphviz.Node,
 function parseGraphvizEdge(edge: Graphviz.Edge,
     getBox: (id: number) => Graph.Box,
     transformPoint: (point: Point) => Point): Graph.Wire {
-  /* Get source and target nodes. */
+  // Get source and target nodes.
   const source = getBox(edge.tail);
   const target = getBox(edge.head);
-  const wire: Graph.Wire = {
+
+  // Parse cubic B-spline representing the edge.
+  const spline = parseSpline(edge.pos).map(transformPoint);
+  
+  return {
     id: edge.id,
     source: source.id,
     target: target.id,
+    sourcePoint: _.first(spline),
+    targetPoint: _.last(spline),
+    bendPoints: spline,
   };
-
-  /* Parse source and target points. */
-  const spline = parseSpline(edge.pos).map(transformPoint);
-  const startPoint = spline[0];
-  const endPoint = spline.slice(-1)[0];
-  wire.sourcePoint = {
-    x: _.round(startPoint.x - source.x, 3),
-    y: _.round(startPoint.y - source.y, 3)
-  };
-  wire.targetPoint = {
-    x: _.round(endPoint.x - target.x, 3),
-    y: _.round(endPoint.y - target.y, 3)
-  };
-
-  return wire;
 }
 
 /* Parse array of floats in Graphviz's comma-separated format.
@@ -101,6 +93,7 @@ function parseFloatArray(s: string): number[] {
 }
 
 /* Parse Graphviz point.
+
    http://www.graphviz.org/doc/info/attrs.html#k:point
  */
 function parsePoint(s: string): Point {
@@ -109,7 +102,12 @@ function parsePoint(s: string): Point {
 }
 
 /* Parse Graphviz spline.
+
+   In Graphviz, a "spline" is a cubic B-spline of overlapping cubic Bezier
+   curves. It consists of 3n+1 points, where n is the number of Bezier curves.
+
    http://www.graphviz.org/doc/info/attrs.html#k:splineType
+   http://www.graphviz.org/content/how-convert-b-spline-bezier
  */
 function parseSpline(spline: string): Point[] {
   let points: Point[] = [];

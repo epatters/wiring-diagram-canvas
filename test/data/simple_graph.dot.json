@@ -1,0 +1,204 @@
+{
+  "name": "G",
+  "directed": true,
+  "strict": false,
+  "bb": "0,0,190,111",
+  "fontname": "Serif",
+  "rankdir": "LR",
+  "_subgraph_cnt": 2,
+  "objects": [
+    {
+      "name": "%3",
+      "fontname": "Serif",
+      "rank": "source",
+      "rankdir": "TB",
+      "_gvid": 0,
+      "nodes": [
+        2,3
+      ],
+      "edges": [
+        0
+      ]
+    },
+    {
+      "name": "%7",
+      "fontname": "Serif",
+      "rank": "sink",
+      "rankdir": "TB",
+      "_gvid": 1,
+      "nodes": [
+        4,5
+      ],
+      "edges": [
+        3
+      ]
+    },
+    {
+      "_gvid": 2,
+      "name": "n1p1",
+      "fontname": "Serif",
+      "height": "0.33333",
+      "label": "",
+      "margin": "0",
+      "pos": "0.5,99",
+      "shape": "none",
+      "style": "invis",
+      "width": "0.013889"
+    },
+    {
+      "_gvid": 3,
+      "name": "n1p2",
+      "fontname": "Serif",
+      "height": "0.33333",
+      "label": "",
+      "margin": "0",
+      "pos": "0.5,57",
+      "shape": "none",
+      "style": "invis",
+      "width": "0.013889"
+    },
+    {
+      "_gvid": 4,
+      "name": "n2p1",
+      "fontname": "Serif",
+      "height": "0.33333",
+      "label": "",
+      "margin": "0",
+      "pos": "189.5,74",
+      "shape": "none",
+      "style": "invis",
+      "width": "0.013889"
+    },
+    {
+      "_gvid": 5,
+      "name": "n2p2",
+      "fontname": "Serif",
+      "height": "0.33333",
+      "label": "",
+      "margin": "0",
+      "pos": "189.5,28",
+      "shape": "none",
+      "style": "invis",
+      "width": "0.013889"
+    },
+    {
+      "_gvid": 6,
+      "name": "n3",
+      "comment": "g",
+      "fontname": "Serif",
+      "height": "0.55556",
+      "id": "n3",
+      "label": "<TABLE BORDER=\"0\" CELLPADDING=\"0\" CELLSPACING=\"0\">\n<TR>\n<TD><TABLE BORDER=\"0\" CELLPADDING=\"0\" CELLSPACING=\"0\"><TR><TD HEIGHT=\"0\" WIDTH=\"0\" PORT=\"in1\"><\/TD><\/TR><\/TABLE><\/TD>\n<TD BORDER=\"1\" CELLPADDING=\"4\" WIDTH=\"40\" HEIGHT=\"40\"><\/TD>\n<TD><TABLE BORDER=\"0\" CELLPADDING=\"0\" CELLSPACING=\"0\"><TR><TD HEIGHT=\"0\" WIDTH=\"0\" PORT=\"out1\"><\/TD><\/TR><\/TABLE><\/TD>\n<\/TR>\n<\/TABLE>",
+      "margin": "0",
+      "pos": "133,78",
+      "shape": "none",
+      "width": "0.55556"
+    },
+    {
+      "_gvid": 7,
+      "name": "n4",
+      "comment": "h",
+      "fontname": "Serif",
+      "height": "0.55556",
+      "id": "n4",
+      "label": "<TABLE BORDER=\"0\" CELLPADDING=\"0\" CELLSPACING=\"0\">\n<TR>\n<TD><TABLE BORDER=\"0\" CELLPADDING=\"0\" CELLSPACING=\"0\"><TR><TD HEIGHT=\"0\" WIDTH=\"0\"><\/TD><\/TR><\/TABLE><\/TD>\n<TD BORDER=\"1\" CELLPADDING=\"4\" WIDTH=\"40\" HEIGHT=\"40\"><\/TD>\n<TD><TABLE BORDER=\"0\" CELLPADDING=\"0\" CELLSPACING=\"0\"><TR><TD HEIGHT=\"0\" WIDTH=\"0\" PORT=\"out1\"><\/TD><\/TR><\/TABLE><\/TD>\n<\/TR>\n<\/TABLE>",
+      "margin": "0",
+      "pos": "133,20",
+      "shape": "none",
+      "width": "0.55556"
+    },
+    {
+      "_gvid": 8,
+      "name": "n5",
+      "comment": "f",
+      "fontname": "Serif",
+      "height": "0.55556",
+      "id": "n5",
+      "label": "<TABLE BORDER=\"0\" CELLPADDING=\"0\" CELLSPACING=\"0\">\n<TR>\n<TD><TABLE BORDER=\"0\" CELLPADDING=\"0\" CELLSPACING=\"0\"><TR><TD HEIGHT=\"0\" WIDTH=\"0\" PORT=\"in1\"><\/TD><\/TR><TR><TD HEIGHT=\"0\" WIDTH=\"0\" PORT=\"in2\"><\/TD><\/TR><\/TABLE><\/TD>\n<TD BORDER=\"1\" CELLPADDING=\"4\" WIDTH=\"40\" HEIGHT=\"40\"><\/TD>\n<TD><TABLE BORDER=\"0\" CELLPADDING=\"0\" CELLSPACING=\"0\"><TR><TD HEIGHT=\"0\" WIDTH=\"0\" PORT=\"out1\"><\/TD><\/TR><\/TABLE><\/TD>\n<\/TR>\n<\/TABLE>",
+      "margin": "0",
+      "pos": "57,78",
+      "shape": "none",
+      "width": "0.55556"
+    }
+  ],
+  "edges": [
+    {
+      "_gvid": 0,
+      "tail": 2,
+      "head": 3,
+      "arrowsize": "0.5",
+      "fontname": "Serif",
+      "pos": "e,0.5,69.141 0.5,86.87 0.5,82.714 0.5,78.559 0.5,74.404",
+      "style": "invis"
+    },
+    {
+      "_gvid": 1,
+      "tail": 2,
+      "head": 8,
+      "arrowsize": "0.5",
+      "comment": "X",
+      "fontname": "Serif",
+      "headport": "in1:w",
+      "id": "e1",
+      "pos": "e,37,88 1,99 15.9,99 19.544,90.275 31.983,88.366",
+      "tailport": "e"
+    },
+    {
+      "_gvid": 2,
+      "tail": 3,
+      "head": 8,
+      "arrowsize": "0.5",
+      "comment": "Y",
+      "fontname": "Serif",
+      "headport": "in2:w",
+      "id": "e2",
+      "pos": "e,37,68 1,57 15.9,57 19.544,65.725 31.983,67.634",
+      "tailport": "e"
+    },
+    {
+      "_gvid": 3,
+      "tail": 4,
+      "head": 5,
+      "arrowsize": "0.5",
+      "fontname": "Serif",
+      "pos": "e,189.5,40.219 189.5,61.86 189.5,56.337 189.5,50.814 189.5,45.291",
+      "style": "invis"
+    },
+    {
+      "_gvid": 4,
+      "tail": 6,
+      "head": 4,
+      "arrowsize": "0.5",
+      "comment": "Z",
+      "fontname": "Serif",
+      "headport": "w",
+      "id": "e3",
+      "pos": "e,189,74 153,78 167.21,78 171.84,74.883 183.81,74.152",
+      "tailport": "out1:e"
+    },
+    {
+      "_gvid": 5,
+      "tail": 7,
+      "head": 5,
+      "arrowsize": "0.5",
+      "comment": "W",
+      "fontname": "Serif",
+      "headport": "w",
+      "id": "e4",
+      "pos": "e,189,28 153,20 167.47,20 171.67,26.235 183.74,27.696",
+      "tailport": "out1:e"
+    },
+    {
+      "_gvid": 6,
+      "tail": 8,
+      "head": 6,
+      "arrowsize": "0.5",
+      "comment": "Z",
+      "fontname": "Serif",
+      "headport": "in1:w",
+      "id": "e5",
+      "pos": "e,113,78 77,78 91.125,78 95.898,78 107.83,78",
+      "tailport": "out1:e"
+    }
+  ]
+}

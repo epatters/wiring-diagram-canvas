@@ -1,0 +1,138 @@
+{
+  "id": "root",
+  "ports": [
+    {
+      "id": "in1",
+      "portkind": "input",
+      "properties": {
+        "value": "X"
+      }
+    },
+    {
+      "id": "in2",
+      "portkind": "input",
+      "properties": {
+        "value": "Y"
+      }
+    },
+    {
+      "id": "out1",
+      "portkind": "output",
+      "properties": {
+        "value": "Z"
+      }
+    },
+    {
+      "id": "out2",
+      "portkind": "output",
+      "properties": {
+        "value": "W"
+      }
+    }
+  ],
+  "children": [
+    {
+      "id": "n3",
+      "ports": [
+        {
+          "id": "in1",
+          "portkind": "input",
+          "properties": {
+            "value": "Z"
+          }
+        },
+        {
+          "id": "out1",
+          "portkind": "output",
+          "properties": {
+            "value": "Z"
+          }
+        }
+      ],
+      "properties": {
+        "value": "g"
+      }
+    },
+    {
+      "id": "n4",
+      "ports": [
+        {
+          "id": "out1",
+          "portkind": "output",
+          "properties": {
+            "value": "W"
+          }
+        }
+      ],
+      "properties": {
+        "value": "h"
+      }
+    },
+    {
+      "id": "n5",
+      "ports": [
+        {
+          "id": "in1",
+          "portkind": "input",
+          "properties": {
+            "value": "X"
+          }
+        },
+        {
+          "id": "in2",
+          "portkind": "input",
+          "properties": {
+            "value": "Y"
+          }
+        },
+        {
+          "id": "out1",
+          "portkind": "output",
+          "properties": {
+            "value": "Z"
+          }
+        }
+      ],
+      "properties": {
+        "value": "f"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "source": "root",
+      "sourcePort": "in1",
+      "target": "n5",
+      "targetPort": "in1"
+    },
+    {
+      "id": "e2",
+      "source": "root",
+      "sourcePort": "in2",
+      "target": "n5",
+      "targetPort": "in2"
+    },
+    {
+      "id": "e3",
+      "source": "n3",
+      "sourcePort": "out1",
+      "target": "root",
+      "targetPort": "out1"
+    },
+    {
+      "id": "e4",
+      "source": "n4",
+      "sourcePort": "out1",
+      "target": "root",
+      "targetPort": "out2"
+    },
+    {
+      "id": "e5",
+      "source": "n5",
+      "sourcePort": "out1",
+      "target": "n3",
+      "targetPort": "in1"
+    }
+  ]
+}
