@@ -73,6 +73,12 @@ export interface Edge extends GraphElement {
   
   /** Tail (source) of edge. */
   tail: number;
+
+  /** Head port (target port) of edge. */
+  headport?: string;
+  
+  /** Tail port (source port) of edge. */
+  tailport?: string;
   
   /** Positions of start, end, and control points of spline.
    * 

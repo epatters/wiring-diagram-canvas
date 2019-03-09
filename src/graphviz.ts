@@ -34,18 +34,18 @@ export function parseGraphvizLayout(graphviz: Graphviz.Graph): Graph.FlowGraph {
      exclude any nodes, only the subgraph structure.
    */
   const offset = graphviz._subgraph_cnt;
-  const nodeIDs: string[] = [];
+  const nodeIDs: [string,string?][] = [];
   const mapNodeID = (id: number) => nodeIDs[id - offset];
   for (let obj of graphviz.objects.slice(offset)) {
+    const node = parseGraphvizNode(obj as Graphviz.Node, transformPoint);
     if (obj.style === "invis") {
       // Invisible nodes are ports of the outer box.
-      graph.ports.push({id: obj.id });
-      nodeIDs.push("root");
+      graph.ports.push({ id: node.id, x: node.x, y: node.y });
+      nodeIDs.push(["root", node.id]);
     } else {
       // All other nodes are boxes in the wiring diagram.
-      const node = parseGraphvizNode(obj as Graphviz.Node, transformPoint);
       graph.children.push(node);
-      nodeIDs.push(node.id);
+      nodeIDs.push([node.id, undefined]);
     }
   }
 
@@ -78,24 +78,44 @@ function parseGraphvizNode(node: Graphviz.Node,
 /* Parse Graphviz edge in JSON format.
  */
 function parseGraphvizEdge(edge: Graphviz.Edge,
-    mapNodeID: (id: number) => string,
+    mapNodeID: (id: number) => [string,string?],
     transformPoint: (point: Point) => Point): Graph.Wire {
-  // Get source and target nodes.
-  const source = mapNodeID(edge.tail);
-  const target = mapNodeID(edge.head);
+  // Get source and targets.
+  let [source, sourcePort] = mapNodeID(edge.tail);
+  let [target, targetPort] = mapNodeID(edge.head);
+  if (!sourcePort && edge.tailport) {
+    sourcePort = parseGraphvizPort(edge.tailport);
+  }
+  if (!targetPort && edge.headport) {
+    targetPort = parseGraphvizPort(edge.headport);
+  }
 
   // Parse cubic B-spline representing the edge.
   const spline = parseSpline(edge.pos).map(transformPoint);
   
   return {
     id: edge.id,
-    source,
-    target,
+    source, sourcePort,
+    target, targetPort,
     sourcePoint: _.first(spline),
     targetPoint: _.last(spline),
     bendPoints: spline,
   };
 }
+
+/* Parse Graphviz port specification.
+
+   https://www.graphviz.org/doc/info/attrs.html#k:portPos
+ */
+function parseGraphvizPort(port: string) {
+  let components = port.split(":");
+  if (compassPoints.includes(_.last(components))) {
+    // Discard the compass point, if present.
+    components.pop();
+  }
+  return _.isEmpty(components) ? undefined : components.join(":");
+}
+const compassPoints = ["n","ne","e","se","s","sw","w","nw","c","_"];
 
 /* Parse array of floats in Graphviz's comma-separated format.
  */
