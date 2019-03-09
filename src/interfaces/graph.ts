@@ -47,7 +47,7 @@ export interface Box extends GraphElement {
  */
 export interface Port extends GraphElement {
   /** Is the port an input port or an output port? */
-  portkind: string; // 'input' | 'output';
+  portkind?: string; // 'input' | 'output';
 }
 
 /** Wire between boxes in a flow graph.

@@ -11,8 +11,12 @@ import * as Graphviz from './interfaces/graphviz';
  * ignored.
  */
 export function parseGraphvizLayout(graphviz: Graphviz.Graph): Graph.FlowGraph {
-  let boxes: Graph.Box[] = [];
-  let wires: Graph.Wire[] = [];
+  const graph: Graph.FlowGraph = {
+    id: "root",
+    ports: [],
+    children: [],
+    edges: [],
+  };
 
   /* Use bounding box to transform coordinates.
 
@@ -30,24 +34,31 @@ export function parseGraphvizLayout(graphviz: Graphviz.Graph): Graph.FlowGraph {
      exclude any nodes, only the subgraph structure.
    */
   const offset = graphviz._subgraph_cnt;
+  const nodeIDs: string[] = [];
+  const mapNodeID = (id: number) => nodeIDs[id - offset];
   for (let obj of graphviz.objects.slice(offset)) {
-    boxes.push(parseGraphvizNode(obj as Graphviz.Node, transformPoint));
+    if (obj.style === "invis") {
+      // Invisible nodes are ports of the outer box.
+      graph.ports.push({id: obj.id });
+      nodeIDs.push("root");
+    } else {
+      // All other nodes are boxes in the wiring diagram.
+      const node = parseGraphvizNode(obj as Graphviz.Node, transformPoint);
+      graph.children.push(node);
+      nodeIDs.push(node.id);
+    }
   }
 
   /* Parses edges of graph. */
-  const getBox = (id: number) => boxes[id - offset];
   for (let edge of graphviz.edges) {
     if (edge.style === "invis") {
       // Omit invisible edges, which are used to tweak the layout in Graphviz.
       continue;
     }
-    wires.push(parseGraphvizEdge(edge, getBox, transformPoint));
+    graph.edges.push(parseGraphvizEdge(edge, mapNodeID, transformPoint));
   }
   
-  return {
-    children: boxes, 
-    edges: wires,
-  };
+  return graph;
 }
 
 /* Parse Graphviz node in JSON format.
@@ -67,19 +78,19 @@ function parseGraphvizNode(node: Graphviz.Node,
 /* Parse Graphviz edge in JSON format.
  */
 function parseGraphvizEdge(edge: Graphviz.Edge,
-    getBox: (id: number) => Graph.Box,
+    mapNodeID: (id: number) => string,
     transformPoint: (point: Point) => Point): Graph.Wire {
   // Get source and target nodes.
-  const source = getBox(edge.tail);
-  const target = getBox(edge.head);
+  const source = mapNodeID(edge.tail);
+  const target = mapNodeID(edge.head);
 
   // Parse cubic B-spline representing the edge.
   const spline = parseSpline(edge.pos).map(transformPoint);
   
   return {
     id: edge.id,
-    source: source.id,
-    target: target.id,
+    source,
+    target,
     sourcePoint: _.first(spline),
     targetPoint: _.last(spline),
     bendPoints: spline,

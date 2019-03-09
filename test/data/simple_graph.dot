@@ -6,12 +6,16 @@ digraph G {
     graph [rank="source",rankdir="TB"];
     node [style="invis",shape="none",label="",width="0",height="0.333"];
     edge [style="invis"];
+    n1p1 [id="in1"];
+    n1p2 [id="in2"];
     n1p1 -> n1p2;
   }
   {
     graph [rank="sink",rankdir="TB"];
     node [style="invis",shape="none",label="",width="0",height="0.333"];
     edge [style="invis"];
+    n2p1 [id="out1"];
+    n2p2 [id="out2"];
     n2p1 -> n2p2;
   }
   n3 [id="n3",comment="g",label=<<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0">
