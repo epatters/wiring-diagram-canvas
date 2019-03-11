@@ -113,3 +113,9 @@ export interface Point {
   /** y coordinate of point. */
   y: number;
 }
+
+/** Is the box a flow graph, i.e., non atomic?
+ */
+export function isFlowGraph(box: Box): box is FlowGraph {
+  return "children" in box && "edges" in box;
+}

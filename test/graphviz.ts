@@ -5,7 +5,7 @@ import * as path from "path";
 import * as _ from "lodash";
 import "mocha";
 
-import { Graphviz, parseGraphvizLayout } from "../src";
+import { Graph, Graphviz, mergeGraphLayout, parseGraphvizLayout } from "../src";
 
 
 const readTestData = (name: string) => {
@@ -15,21 +15,34 @@ const readTestData = (name: string) => {
 const readTestJSON = (name: string) => JSON.parse(readTestData(name));
 
 
-describe("parse layout from Graphviz dot", () => {
-  const dot: Graphviz.Graph = readTestJSON("simple_graph.dot.json");
-  const graph = parseGraphvizLayout(dot);
+describe("parse and merge layout from output of Graphviz dot", () => {
+  let graph: Graph.FlowGraph = readTestJSON("simple_graph.json");
+  let graphviz: Graphviz.Graph = readTestJSON("simple_graph.dot.json");
+  let graphLayout = parseGraphvizLayout(graphviz);
 
   it("number of ports", () => {
-    assert.equal(graph.ports.length, 4);
+    assert.equal(graphLayout.ports.length, graph.ports.length);
   });
   it("number of nodes", () => {
-    assert.equal(graph.children.length, 3);
+    assert.equal(graphLayout.children.length, graph.children.length);
   });
   it("number of edges", () => {
-    assert.equal(graph.edges.length, 5);
+    assert.equal(graphLayout.edges.length, graph.edges.length);
+  });
+  it("x and y coordinates of nodes", () => {
+    // Just check for existence.
+    assert.ok(_.every(graphLayout.children, node =>
+      node.x !== undefined && node.y !== undefined));
   });
   it("width and height of nodes", () => {
-    assert.ok(_.every(graph.children, node => node.width === 40));
-    assert.ok(_.every(graph.children, node => node.height === 40));
+    assert.ok(_.every(graphLayout.children, node => node.width === 40));
+    assert.ok(_.every(graphLayout.children, node => node.height === 40));
+  });
+  it("merge layout", () => {
+    assert.ok(_.every(graph.children, node =>
+      node.x === undefined && node.y === undefined));
+    mergeGraphLayout(graph, graphLayout);
+    assert.ok(_.every(graph.children, node =>
+      node.x !== undefined && node.y !== undefined));
   });
 })

@@ -3,6 +3,7 @@ import * as _ from 'lodash';
 import { Point } from './interfaces/graph';
 import * as Graph from './interfaces/graph';
 import * as Graphviz from './interfaces/graphviz';
+import { mergeGraphData } from './graph';
 
 
 /** Parse graph layout from Graphviz dot output in JSON format.
