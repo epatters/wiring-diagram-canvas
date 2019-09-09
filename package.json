@@ -10,11 +10,11 @@
     "test": "./node_modules/mocha/bin/mocha -r ts-node/register ./test/**/*.ts"
   },
   "peerDependencies": {
-    "konva": "^2.6.0",
+    "konva": "^4.0.9",
     "lodash": "^4.17.11",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
-    "react-konva": "^16.7.1"
+    "react-konva": "^16.9.0-0"
   },
   "devDependencies": {
     "@types/d3-path": "^1.0.7",
@@ -24,12 +24,12 @@
     "@types/react": "^16.7.18",
     "@types/react-dom": "^16.0.11",
     "awesome-typescript-loader": "^5.2.1",
-    "konva": "^2.6.0",
+    "konva": "^4.0.9",
     "lodash": "^4.17.11",
     "mocha": "^6.0.2",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
-    "react-konva": "^16.7.1",
+    "react-konva": "^16.9.0-0",
     "ts-node": "^8.0.3",
     "typescript": "^3.2.2"
   },

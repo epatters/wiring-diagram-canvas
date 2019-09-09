@@ -1,4 +1,4 @@
-import * as Konva from 'konva';
+import Konva from 'konva';
 
 
 /* Move all ancestors to the top.
@@ -6,7 +6,7 @@ import * as Konva from 'konva';
    Used to display tooltips without occlusion by other nodes.
  */
 export function moveAncestorsToTop(node: Konva.Node, selector?: string) {
-  node.findAncestors(selector).map(ancestor => {
+  node.findAncestors(selector, undefined, undefined).map(ancestor => {
     if (ancestor.getParent())
       ancestor.moveToTop();
   });

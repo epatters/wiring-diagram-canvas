@@ -1,13 +1,13 @@
 import * as React from 'react';
-import * as Konva from 'konva';
-import { KonvaNodeProps, Group } from 'react-konva';
+import Konva from 'konva';
+import { KonvaNodeEvents, Group } from 'react-konva';
 
 import * as Graph from '../interfaces/graph';
 import { Box } from './box';
 import { Wire } from './wire';
 
 
-interface FlowGraphProps extends Graph.FlowGraph, Konva.ContainerConfig, KonvaNodeProps {}
+interface FlowGraphProps extends Graph.FlowGraph, Konva.ContainerConfig, KonvaNodeEvents {}
 
 export const FlowGraph = (props: FlowGraphProps) => {
   return (

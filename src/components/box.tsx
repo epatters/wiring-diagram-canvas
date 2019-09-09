@@ -1,6 +1,6 @@
 import * as React from 'react';
-import * as Konva from 'konva';
-import { KonvaNodeProps, Group, Rect, Label, Tag, Text } from 'react-konva';
+import Konva from 'konva';
+import { KonvaNodeEvents, Group, Rect, Label, Tag, Text } from 'react-konva';
 
 import * as style from '../../style/canvas.json';
 import * as Graph from '../interfaces/graph';
@@ -8,7 +8,7 @@ import { Port } from './port';
 import { moveAncestorsToTop } from './util';
 
 
-interface BoxProps extends Graph.Box, Konva.ContainerConfig, KonvaNodeProps {}
+interface BoxProps extends Graph.Box, Konva.ContainerConfig, KonvaNodeEvents {}
 
 interface BoxState {
   hovering: boolean;

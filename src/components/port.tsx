@@ -1,13 +1,13 @@
 import * as React from 'react';
-import * as Konva from 'konva';
-import { KonvaNodeProps, Group, Circle, Label, Tag, Text } from 'react-konva';
+import Konva from 'konva';
+import { KonvaNodeEvents, Group, Circle, Label, Tag, Text } from 'react-konva';
 
 import * as style from '../../style/canvas.json';
 import * as Graph from '../interfaces/graph';
 import { moveAncestorsToTop } from './util';
 
 
-interface PortProps extends Graph.Port, Konva.ContainerConfig, KonvaNodeProps {}
+interface PortProps extends Graph.Port, Konva.ContainerConfig, KonvaNodeEvents {}
 
 interface PortState {
   hovering: boolean;
