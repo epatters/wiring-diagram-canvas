@@ -76,13 +76,7 @@ export class Wire extends React.Component<WireProps,WireState> {
           ref={ref => {this.path = ref}}
           stroke={this.state.hovering ? style.stroke.highlightColor : style.stroke.color}
           strokeWidth={style.stroke.width}
-        />
-        {/* Invisible path with wider stroke, to make hovering easier */}
-        <Path
-          data={this.state.pathData}
-          opacity={0}
-          stroke="white"
-          strokeWidth={3*style.stroke.width}
+          hitStrokeWidth={3*style.stroke.width}
           onMouseEnter={evt => {
             moveAncestorsToTop(evt.target, 'Group');
             this.setState({hovering: true});
