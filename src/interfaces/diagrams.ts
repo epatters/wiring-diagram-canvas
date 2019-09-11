@@ -90,13 +90,15 @@ interface DiagramElement {
   /** ID of diagram element. */
   id?: string;
 
-  /** Text labels associated with diagram element.
+  /** Text label associated with diagram element.
    * 
-   * Currently, we allow elements to have at most one label.
+   * Simplified from the ELK JSON format, which allows multiple labels:
+   * https://github.com/OpenKieler/elkjs/issues/27
+   * https://github.com/OpenKieler/elkjs/issues/30
    */
-  labels?: {
+  label?: {
     text: string;
-  }[];
+  };
 
   /** Arbitrary JSON data associated with diagram element. */
   properties?: {

@@ -22,8 +22,8 @@ export class Box extends React.Component<BoxProps,BoxState> {
   }
 
   render() {
-    const { id, labels, ports, width, height, ...props } = this.props;
-    const label = labels && labels.length > 0 ? labels[0].text : null;
+    const { id, label, ports, width, height, ...props } = this.props;
+    const textLabel = label ? label.text : null;
     const inputPorts = ports.filter(port => port.portkind === "input");
     const outputPorts = ports.filter(port => port.portkind === "output");
     const inputPortSep = height / (inputPorts.length + 1);
@@ -36,7 +36,7 @@ export class Box extends React.Component<BoxProps,BoxState> {
     https://github.com/konvajs/react-konva/issues/6
     */
     const textWidth = new Konva.Text({
-      text: label,
+      text: textLabel,
       fontSize: style.box.fontSize
     }).getTextWidth();
 
@@ -63,12 +63,12 @@ export class Box extends React.Component<BoxProps,BoxState> {
             x={width} y={(i+1) * outputPortSep}
           />
         )}
-        {label === null ? null :
+        {textLabel === null ? null :
         <Label x={width/2} y={height + style.label.padding}
           offsetX={textWidth/2 + style.label.padding} >
           <Tag cornerRadius={5}
             fill={style.label.baseColor} opacity={style.label.opacity} />
-          <Text text={label} fontSize={style.box.fontSize}
+          <Text text={textLabel} fontSize={style.box.fontSize}
             fill={style.label.textColor} padding={style.label.padding} />
         </Label>}
       </Group>
