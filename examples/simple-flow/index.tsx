@@ -11,7 +11,7 @@ class App extends React.Component {
     return (
       <Stage width={window.innerWidth} height={window.innerHeight}>
         <Layer>
-          <FlowGraph {...flow} />
+          <FlowGraph x={50} y={50} {...flow} />
         </Layer>
       </Stage>
     );

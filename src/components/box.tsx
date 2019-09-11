@@ -42,8 +42,7 @@ export class Box extends React.Component<BoxProps,BoxState> {
 
     return (
       <Group {...props} name={id} offsetX={width/2} offsetY={height/2}>
-        <Rect x={0} y={0}
-          width={width} height={height}
+        <Rect x={0} y={0} width={width} height={height}
           cornerRadius={5}
           fill={style.box.baseColor}
           stroke={this.state.hovering ? style.stroke.highlightColor : style.stroke.color}

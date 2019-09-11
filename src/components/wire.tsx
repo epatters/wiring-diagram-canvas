@@ -40,13 +40,14 @@ export class Wire extends React.Component<WireProps,WireState> {
   /* Update path based on positions of source and target ports.
   */
   updatePath() {
-    // Get positions of source and target ports, relative to the layer.
+    // Get positions of source and target ports, relative to the parent group.
     const { source, sourcePort, target, targetPort } = this.props;
-    const layer = this.path.getLayer();
-    const sourceNode = layer.findOne(`.${source}:${sourcePort}`);
-    const targetNode = layer.findOne(`.${target}:${targetPort}`);
-    const start = sourceNode.getAbsolutePosition(layer);
-    const end = targetNode.getAbsolutePosition(layer);
+    const diagram = this.path.parent.findAncestor(
+      "Group", undefined, undefined) as Konva.Group;
+    const sourceNode = diagram.findOne(`.${source}:${sourcePort}`);
+    const targetNode = diagram.findOne(`.${target}:${targetPort}`);
+    const start = sourceNode.getAbsolutePosition(diagram);
+    const end = targetNode.getAbsolutePosition(diagram);
     
     // Construct SVG path data.
     const delta = {x: end.x - start.x, y: end.y - start.y};

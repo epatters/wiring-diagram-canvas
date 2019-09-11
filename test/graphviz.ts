@@ -38,6 +38,10 @@ describe("parse and merge layout from output of Graphviz dot", () => {
     assert.ok(_.every(graphLayout.children, node => node.width === 40));
     assert.ok(_.every(graphLayout.children, node => node.height === 40));
   });
+  it("width and height of outer box", () => {
+    assert.equal(graphLayout.width, 190);
+    assert.equal(graphLayout.height, 111);
+  });
   it("merge layout", () => {
     assert.ok(_.every(graph.children, node =>
       node.x === undefined && node.y === undefined));

@@ -1,6 +1,17 @@
 {
   "id": "root",
-  "ports": [],
+  "width": 500,
+  "height": 350,
+  "ports": [
+    {
+      "id": "file",
+      "portkind": "input"
+    },
+    {
+      "id": "predictions",
+      "portkind": "output"
+    }
+  ],
   "children": [
     {
       "id": "lm",
@@ -14,7 +25,7 @@
         }
       ],
       "x": 100,
-      "y": 100,
+      "y": 50,
       "width": 40,
       "height": 40
     },
@@ -25,6 +36,10 @@
       ],
       "ports": [
         {
+          "id": "file",
+          "portkind": "input"
+        },
+        {
           "id": "predictors",
           "portkind": "output"
         },
@@ -34,7 +49,7 @@
         }
       ],
       "x": 100,
-      "y": 300,
+      "y": 250,
       "width": 60,
       "height": 60
     },
@@ -65,7 +80,7 @@
         }
       ],
       "x": 250,
-      "y": 200,
+      "y": 150,
       "width": 60,
       "height": 60
     },
@@ -86,12 +101,21 @@
         }
       ],
       "x": 400,
-      "y": 300,
+      "y": 250,
       "width": 60,
       "height": 60
     }
   ],
   "edges": [
+    {
+      "source": "root",
+      "sourcePort": "file",
+      "target": "read",
+      "targetPort": "file",
+      "labels": [
+        { "text": "file" }
+      ]
+    },
     {
       "source": "lm",
       "sourcePort": "model",
@@ -116,7 +140,7 @@
       "target": "fit",
       "targetPort": "response",
       "labels": [
-        { "text": "column" }        
+        { "text": "column" }
       ]
     },
     {
@@ -135,6 +159,15 @@
       "targetPort": "predictors",
       "labels": [
         { "text": "table" }
+      ]
+    },
+    {
+      "source": "predict",
+      "sourcePort": "response",
+      "target": "root",
+      "targetPort": "predictions",
+      "labels": [
+        { "text": "column" }
       ]
     }
   ]

@@ -3,7 +3,6 @@ import * as _ from 'lodash';
 import { Point } from './interfaces/graph';
 import * as Graph from './interfaces/graph';
 import * as Graphviz from './interfaces/graphviz';
-import { mergeGraphData } from './graph';
 
 
 /** Parse graph layout from Graphviz dot output in JSON format.
@@ -19,7 +18,7 @@ export function parseGraphvizLayout(graphviz: Graphviz.Graph): Graph.FlowGraph {
     edges: [],
   };
 
-  /* Use bounding box to transform coordinates.
+  /* Parse bounding box and use it to transform coordinates.
 
      Graphviz uses the standard Cartesian coordinate system (origin in bottom
      left corner), while Konva uses the HTML canvas coordinate system (origin in
@@ -30,6 +29,7 @@ export function parseGraphvizLayout(graphviz: Graphviz.Graph): Graph.FlowGraph {
   const transformPoint = (point: Point): Point => (
     { x: point.x, y: bb[3] - point.y }
   );
+  [graph.width, graph.height] = [bb[2], bb[3]];
 
   /* Parse nodes of graph, ignoring any subgraphs. Note that this does not
      exclude any nodes, only the subgraph structure.
