@@ -22,7 +22,7 @@ export class Port extends React.Component<PortProps,PortState> {
 
   render() {
     const { id, labels, ...props } = this.props;
-    const label = labels && labels.length > 0 ? labels[0].text : id;
+    const label = labels && labels.length > 0 ? labels[0].text : null;
     return (
       <Group {...props}>
         <Circle 
@@ -36,6 +36,7 @@ export class Port extends React.Component<PortProps,PortState> {
           }}
           onMouseLeave={() => this.setState({hovering: false})}
         />
+        {label === null ? null :
         <Label
           x={2*style.port.radius} y={2*style.port.radius}
           visible={this.state.hovering} >
@@ -43,7 +44,7 @@ export class Port extends React.Component<PortProps,PortState> {
             fill={style.label.baseColor} opacity={style.label.opacity} />
           <Text text={label} fontSize={style.port.fontSize}
             fill={style.label.textColor} padding={style.label.padding} />
-        </Label>
+        </Label>}
       </Group>
     );
   }

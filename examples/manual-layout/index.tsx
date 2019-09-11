@@ -3,7 +3,7 @@ import { render } from 'react-dom';
 import { Stage, Layer } from 'react-konva';
 
 import { WiringDiagram } from '../../src';
-import * as diagram from './diagram.json';
+import * as diagram from './diagram-with-layout.json';
 
 
 class App extends React.Component {
@@ -11,7 +11,7 @@ class App extends React.Component {
     return (
       <Stage width={window.innerWidth} height={window.innerHeight}>
         <Layer>
-          <WiringDiagram x={50} y={50} {...diagram} />
+          <WiringDiagram x={25} y={25} {...diagram} />
         </Layer>
       </Stage>
     );

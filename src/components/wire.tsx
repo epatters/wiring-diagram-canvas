@@ -68,7 +68,7 @@ export class Wire extends React.Component<WireProps,WireState> {
 
   render() {
     const { id, labels } = this.props;
-    const label = labels && labels.length > 0 ? labels[0].text : id;
+    const label = labels && labels.length > 0 ? labels[0].text : null;
     const labelPos = this.getPathPoint(0.5);
     return (
       <Group x={this.state.x} y={this.state.y}>
@@ -84,6 +84,7 @@ export class Wire extends React.Component<WireProps,WireState> {
           }}
           onMouseLeave={() => this.setState({hovering: false})}
         />
+        {label === null ? null :
         <Label
           x={labelPos !== null ? labelPos.x + 3*style.stroke.width : 0}
           y={labelPos !== null ? labelPos.y + 3*style.stroke.width : 0}
@@ -92,7 +93,7 @@ export class Wire extends React.Component<WireProps,WireState> {
             fill={style.label.baseColor} opacity={style.label.opacity} />
           <Text text={label} fontSize={style.wire.fontSize}
             fill={style.label.textColor} padding={style.label.padding} />
-        </Label>
+        </Label>}
       </Group>
     )
   }

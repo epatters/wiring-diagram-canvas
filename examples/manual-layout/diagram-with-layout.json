@@ -61,6 +61,9 @@
       "ports": [
         {
           "id": "model",
+          "labels": [
+            { "text": "unfitted model" }
+          ],
           "portkind": "input"
         },
         {
@@ -86,6 +89,9 @@
     },
     {
       "id": "predict",
+      "labels": [
+        { "text": "predict" }
+      ],
       "ports": [
         {
           "id": "model",
