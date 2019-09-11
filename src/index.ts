@@ -1,11 +1,11 @@
-import * as Graph from './interfaces/graph';
+import * as Diagrams from './interfaces/diagrams';
 import * as Graphviz from './interfaces/graphviz';
 
 export {
-  Graph,
+  Diagrams,
   Graphviz,
 };
 
 export * from './components';
-export * from './graph';
+export * from './diagrams';
 export * from './graphviz';

@@ -3,15 +3,15 @@ import Konva from 'konva';
 import { KonvaNodeEvents, Group, Rect } from 'react-konva';
 
 import * as style from '../../style/canvas.json';
-import * as Graph from '../interfaces/graph';
+import * as Diagrams from '../interfaces/diagrams';
 import { Box } from './box';
 import { Port } from './port';
 import { Wire } from './wire';
 
 
-interface FlowGraphProps extends Graph.FlowGraph, Konva.ContainerConfig, KonvaNodeEvents {}
+interface WiringDiagramProps extends Diagrams.WiringDiagram, Konva.ContainerConfig, KonvaNodeEvents {}
 
-export const FlowGraph = (allProps: FlowGraphProps) => {
+export const WiringDiagram = (allProps: WiringDiagramProps) => {
   const { id, labels, ports, width, height, children, edges, ...props } = allProps;
   const inputPorts = ports.filter(port => port.portkind === "input");
   const outputPorts = ports.filter(port => port.portkind === "output");

@@ -1,6 +1,6 @@
-/* JSON format for flow graphs (wiring diagrams).
+/* JSON format for wiring diagrams (flow graphs).
  *
- * We use the same format as Catlab.jl for serializing wiring diagrams as JSON.
+ * We use the same format as Catlab.jl for serializing wiring diagrams in JSON.
  * It is based on the JSON graph format used in the KIELER project and its
  * successor ELK (Eclipse Layout Kernel).
  *
@@ -14,19 +14,19 @@
  *   https://www.eclipse.org/elk/documentation/tooldevelopers/graphdatastructure/coordinatesystem.html
  */
 
-/** A flow graph, aka wiring diagram.
+/** A wiring diagram (flow graph).
 */
-export interface FlowGraph extends Box {
-  /** Boxes in flow graph. */
+export interface WiringDiagram extends Box {
+  /** Boxes in wiring diagram. */
   children: Box[];
 
-  /** Wires in flow graph. */
+  /** Wires in wiring diagram. */
   edges: Wire[];
 }
 
-/** Box in a flow graph.
+/** Box in a wiring diagram.
  */
-export interface Box extends GraphElement {
+export interface Box extends DiagramElement {
   /** Input and output ports of box. */
   ports?: Port[];
 
@@ -45,7 +45,7 @@ export interface Box extends GraphElement {
 
 /** Port attached to a box.
  */
-export interface Port extends GraphElement {
+export interface Port extends DiagramElement {
   /** Is the port an input port or an output port? */
   portkind?: string; // 'input' | 'output';
 
@@ -56,9 +56,9 @@ export interface Port extends GraphElement {
   y?: number;
 }
 
-/** Wire between boxes in a flow graph.
+/** Wire between boxes in a wiring diagram.
  */
-export interface Wire extends GraphElement {
+export interface Wire extends DiagramElement {
   /** ID of source box. */
   source: string;
 
@@ -84,13 +84,13 @@ export interface Wire extends GraphElement {
   bendPoints?: Point[];
 }
 
-/** Abstract base interface for elements in a flow graph.
+/** Abstract base interface for elements in a wiring diagram.
  */
-interface GraphElement {
-  /** ID of graph element. */
+interface DiagramElement {
+  /** ID of diagram element. */
   id?: string;
 
-  /** Text labels associated with graph element.
+  /** Text labels associated with diagram element.
    * 
    * Currently, we allow elements to have at most one label.
    */
@@ -98,7 +98,7 @@ interface GraphElement {
     text: string;
   }[];
 
-  /** Arbitrary JSON data associated with graph element. */
+  /** Arbitrary JSON data associated with diagram element. */
   properties?: {
     [key: string]: any;
   };
@@ -114,8 +114,8 @@ export interface Point {
   y: number;
 }
 
-/** Is the box a flow graph, i.e., non atomic?
+/** Is the box a wiring diagram, i.e., non-atomic?
  */
-export function isFlowGraph(box: Box): box is FlowGraph {
+export function isWiringDiagram(box: Box): box is WiringDiagram {
   return "children" in box && "edges" in box;
 }

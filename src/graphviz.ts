@@ -1,17 +1,16 @@
 import * as _ from 'lodash';
 
-import { Point } from './interfaces/graph';
-import * as Graph from './interfaces/graph';
+import { Point, WiringDiagram, Box, Wire } from './interfaces/diagrams';
 import * as Graphviz from './interfaces/graphviz';
 
 
-/** Parse graph layout from Graphviz dot output in JSON format.
+/** Parse diagram layout from Graphviz dot output in JSON format.
  *
  * All information unrelated to layout, such as node and edge labels, is
  * ignored.
  */
-export function parseGraphvizLayout(graphviz: Graphviz.Graph): Graph.FlowGraph {
-  const graph: Graph.FlowGraph = {
+export function parseGraphvizLayout(graphviz: Graphviz.Graph): WiringDiagram {
+  const graph: WiringDiagram = {
     id: "root",
     ports: [],
     children: [],
@@ -65,7 +64,7 @@ export function parseGraphvizLayout(graphviz: Graphviz.Graph): Graph.FlowGraph {
 /* Parse Graphviz node in JSON format.
  */
 function parseGraphvizNode(node: Graphviz.Node,
-    transformPoint: (point: Point) => Point): Graph.Box {
+    transformPoint: (point: Point) => Point): Box {
   const position = transformPoint(parsePoint(node.pos));
   return {
     id: node.id || node.name,
@@ -80,7 +79,7 @@ function parseGraphvizNode(node: Graphviz.Node,
  */
 function parseGraphvizEdge(edge: Graphviz.Edge,
     mapNodeID: (id: number) => [string,string?],
-    transformPoint: (point: Point) => Point): Graph.Wire {
+    transformPoint: (point: Point) => Point): Wire {
   // Get source and targets.
   let [source, sourcePort] = mapNodeID(edge.tail);
   let [target, targetPort] = mapNodeID(edge.head);

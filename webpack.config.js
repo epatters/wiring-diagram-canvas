@@ -1,7 +1,7 @@
 module.exports = {
   mode: "development",
   entry: {
-    "simple-flow": "./examples/simple-flow/index.tsx",
+    "manual-layout": "./examples/manual-layout/index.tsx",
   },
   output: {
     filename: "[name]/bundle.js",

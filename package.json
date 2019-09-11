@@ -1,7 +1,7 @@
 {
-  "name": "flow-graph-canvas",
+  "name": "wiring-diagram-canvas",
   "version": "0.1.0",
-  "description": "Flow graphs in HTML canvas",
+  "description": "Wiring diagrams in HTML canvas",
   "main": "index.js",
   "author": "Evan Patterson",
   "license": "Apache-2.0",

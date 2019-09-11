@@ -3,11 +3,11 @@ import Konva from 'konva';
 import { KonvaNodeEvents, Group, Circle, Label, Tag, Text } from 'react-konva';
 
 import * as style from '../../style/canvas.json';
-import * as Graph from '../interfaces/graph';
+import * as Diagrams from '../interfaces/diagrams';
 import { moveAncestorsToTop } from './util';
 
 
-interface PortProps extends Graph.Port, Konva.ContainerConfig, KonvaNodeEvents {}
+interface PortProps extends Diagrams.Port, Konva.ContainerConfig, KonvaNodeEvents {}
 
 interface PortState {
   hovering: boolean;

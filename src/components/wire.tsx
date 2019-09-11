@@ -4,11 +4,11 @@ import { KonvaNodeEvents, Group, Path, Label, Tag, Text } from 'react-konva';
 import * as d3 from 'd3-path';
 
 import * as style from '../../style/canvas.json';
-import * as Graph from '../interfaces/graph';
+import * as Diagrams from '../interfaces/diagrams';
 import { moveAncestorsToTop } from './util';
 
 
-interface WireProps extends Graph.Wire, Konva.NodeConfig, KonvaNodeEvents {}
+interface WireProps extends Diagrams.Wire, Konva.NodeConfig, KonvaNodeEvents {}
 
 interface WireState {
   x: number;
