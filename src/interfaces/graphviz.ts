@@ -16,8 +16,11 @@ export interface Graph {
   /** Is the graph strict, meaning that no two nodes have multiple edges? */
   strict: boolean;
   
-  /** Bounding box of graph as rectangle. */
+  /** Bounding box of graph as rectangle (units: points). */
   bb: string;
+
+  /** Padding of graph as point (units: inches). */
+  pad?: string;
   
   /** Number of subgraphs in the graph. */
   _subgraph_cnt: number;

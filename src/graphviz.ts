@@ -17,7 +17,7 @@ export function parseGraphvizLayout(graphviz: Graphviz.Graph): WiringDiagram {
     edges: [],
   };
 
-  /* Parse bounding box and use it to transform coordinates.
+  /* Parse bounding box and padding and use them to transform coordinates.
 
      Graphviz uses the standard Cartesian coordinate system (origin in bottom
      left corner), while Konva uses the HTML canvas coordinate system (origin in
@@ -25,10 +25,15 @@ export function parseGraphvizLayout(graphviz: Graphviz.Graph): WiringDiagram {
      numbers in the Graphviz bounding box are always (0,0).
    */
   const bb = parseFloatArray(graphviz.bb);
+  const pad: Point = {x: 0, y: 0};
+  if (graphviz.pad) {
+    const gvPad = parsePoint(graphviz.pad);
+    [pad.x, pad.y] = [inchesToPoints(gvPad.x), inchesToPoints(gvPad.y)];
+  }
   const transformPoint = (point: Point): Point => (
-    { x: point.x, y: bb[3] - point.y }
+    { x: point.x + pad.x, y: bb[3] - point.y + pad.y }
   );
-  [graph.width, graph.height] = [bb[2], bb[3]];
+  [graph.width, graph.height] = [bb[2] + 2*pad.x, bb[3] + 2*pad.y];
 
   /* Parse nodes of graph, ignoring any subgraphs. Note that this does not
      exclude any nodes, only the subgraph structure.
