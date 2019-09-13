@@ -1,6 +1,7 @@
 module.exports = {
   mode: "development",
   entry: {
+    "graphviz-layout": "./examples/graphviz-layout/index.tsx",
     "manual-layout": "./examples/manual-layout/index.tsx",
   },
   output: {

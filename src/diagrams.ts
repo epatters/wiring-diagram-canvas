@@ -1,9 +1,10 @@
 import * as _ from 'lodash';
 
+import * as Diagrams from './interfaces/diagrams';
 import { WiringDiagram, isWiringDiagram } from './interfaces/diagrams';
 
 
-/** Merge graph, node, and edge data from one wiring diagram into another.
+/** Merge diagram, box, and wire data from one wiring diagram into another.
  * 
  * This function mutates its first argument, `diagram`.
  */
@@ -11,27 +12,27 @@ export function mergeDiagramData(diagram: WiringDiagram, sourceDiagram: WiringDi
     mergeFunction?: <T>(object: T, source: T) => T): WiringDiagram {
   mergeFunction = mergeFunction || _.merge;
   
-  // Create look up tables for nodes and edges.
-  const nodeIDs = _.fromPairs(sourceDiagram.children.map((node, i) => [node.id, i]));
-  const edgeIDs = _.fromPairs(sourceDiagram.edges.map((edge, i) => [edge.id, i]));
+  // Create look up tables for boxes and wires.
+  const boxIDs = _.fromPairs(sourceDiagram.children.map((box, i) => [box.id, i]));
+  const wireIDs = _.fromPairs(sourceDiagram.edges.map((wire, i) => [wire.id, i]));
 
-  // Merge graph data (top-level node data).
+  // Merge top-level diagram data.
   mergeFunction(diagram, _.omit(sourceDiagram, ["children", "edges"]));
 
-  // Merge node data, possibly recursively.
-  for (let node of diagram.children) {
-    let sourceNode = sourceDiagram.children[nodeIDs[node.id]];
-    if (isWiringDiagram(node) && isWiringDiagram(sourceNode)) {
-      mergeDiagramData(node, sourceNode, mergeFunction);
+  // Merge box data, possibly recursively.
+  for (let box of diagram.children) {
+    let sourceBox = sourceDiagram.children[boxIDs[box.id]];
+    if (isWiringDiagram(box) && isWiringDiagram(sourceBox)) {
+      mergeDiagramData(box, sourceBox, mergeFunction);
     } else {
-      mergeFunction(node, sourceNode);
+      mergeFunction(box, sourceBox);
     }
   }
 
-  // Merge edge data.
-  for (let edge of diagram.edges) {
-    let sourceEdge = sourceDiagram.edges[edgeIDs[edge.id]];
-    mergeFunction(edge, sourceEdge);
+  // Merge wire data.
+  for (let wire of diagram.edges) {
+    let sourceWire = sourceDiagram.edges[wireIDs[wire.id]];
+    mergeFunction(wire, sourceWire);
   }
 
   return diagram;
@@ -43,4 +44,43 @@ export function mergeDiagramData(diagram: WiringDiagram, sourceDiagram: WiringDi
  */
 export function mergeDiagramLayout(diagram: WiringDiagram, layout: WiringDiagram) {
   return mergeDiagramData(diagram, layout, _.defaults);
+}
+
+
+/** Copy layout attributes of wiring diagram stored in `properties` fields.
+ * 
+ * This function mutates its argument.
+ */
+export function copyDiagramLayoutProperties(diagram: WiringDiagram) {
+  // Copy layout of outer box.
+  copyBoxLayoutProperties(diagram);
+
+  // Copy layout of boxes, possibly recursively.
+  for (let box of diagram.children) {
+    if (isWiringDiagram(box)) {
+      copyDiagramLayoutProperties(box);
+    } else {
+      copyBoxLayoutProperties(box);
+    }
+  }
+
+  // Copy layout of wires.
+  for (let wire of diagram.edges) {
+    _.assign(wire, _.pick(wire.properties, 
+      ["label","sourcePoint","targetPoint","bendPoints"]));
+  }
+
+  return diagram;
+}
+
+function copyBoxLayoutProperties(box: Diagrams.Box) {
+  // Copy layout of ports.
+  for (let port of box.ports) {
+    _.assign(port, _.pick(port.properties, ["label","x","y"]));
+  }
+
+  // Copy layout of box itself.
+  _.assign(box, _.pick(box.properties, ["label","x","y","width","height"]));
+
+  return box;
 }

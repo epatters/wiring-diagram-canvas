@@ -1,0 +1,336 @@
+{
+  "children": [
+    {
+      "id": "n3",
+      "ports": [
+        {
+          "id": "in1",
+          "portkind": "input",
+          "properties": {
+            "label": {
+              "text": "k-means"
+            },
+            "ob": [
+              "Ob",
+              "k-means"
+            ]
+          }
+        },
+        {
+          "id": "out1",
+          "portkind": "output",
+          "properties": {
+            "label": {
+              "text": "array"
+            },
+            "ob": [
+              "Ob",
+              "array"
+            ]
+          }
+        }
+      ],
+      "properties": {
+        "hom": [
+          "Hom",
+          "k-means-centroids",
+          [
+            "Ob",
+            "k-means"
+          ],
+          [
+            "Ob",
+            "array"
+          ]
+        ],
+        "label": {
+          "text": "k-means-centroids"
+        }
+      }
+    },
+    {
+      "id": "n4",
+      "ports": [
+        {
+          "id": "in1",
+          "portkind": "input",
+          "properties": {
+            "label": {
+              "text": "clustering-model"
+            },
+            "ob": [
+              "Ob",
+              "clustering-model"
+            ]
+          }
+        },
+        {
+          "id": "out1",
+          "portkind": "output",
+          "properties": {
+            "label": {
+              "text": "vector"
+            },
+            "ob": [
+              "Ob",
+              "vector"
+            ]
+          }
+        }
+      ],
+      "properties": {
+        "hom": [
+          "Hom",
+          "clustering-model-clusters",
+          [
+            "Ob",
+            "clustering-model"
+          ],
+          [
+            "Ob",
+            "vector"
+          ]
+        ],
+        "label": {
+          "text": "clustering-model-clusters"
+        }
+      }
+    },
+    {
+      "id": "n5",
+      "ports": [
+        {
+          "id": "in1",
+          "portkind": "input",
+          "properties": {
+            "label": {
+              "text": "integer"
+            },
+            "ob": [
+              "Ob",
+              "integer"
+            ]
+          }
+        },
+        {
+          "id": "out1",
+          "portkind": "output",
+          "properties": {
+            "label": {
+              "text": "k-means"
+            },
+            "ob": [
+              "Ob",
+              "k-means"
+            ]
+          }
+        }
+      ],
+      "properties": {
+        "hom": [
+          "construct",
+          [
+            "compose",
+            [
+              "mcopy",
+              [
+                "Ob",
+                "k-means"
+              ],
+              1
+            ],
+            [
+              "Hom",
+              "clustering-model-n-clusters",
+              [
+                "Ob",
+                "clustering-model"
+              ],
+              [
+                "Ob",
+                "integer"
+              ]
+            ]
+          ]
+        ],
+        "label": {
+          "text": "k-means"
+        }
+      }
+    },
+    {
+      "id": "n6",
+      "ports": [
+        {
+          "id": "in1",
+          "portkind": "input",
+          "properties": {
+            "label": {
+              "text": "k-means"
+            },
+            "ob": [
+              "Ob",
+              "k-means"
+            ]
+          }
+        },
+        {
+          "id": "in2",
+          "portkind": "input",
+          "properties": {
+            "label": {
+              "text": "data"
+            },
+            "ob": [
+              "Ob",
+              "data"
+            ]
+          }
+        },
+        {
+          "id": "out1",
+          "portkind": "output",
+          "properties": {
+            "label": {
+              "text": "k-means"
+            },
+            "ob": [
+              "Ob",
+              "k-means"
+            ]
+          }
+        }
+      ],
+      "properties": {
+        "hom": [
+          "Hom",
+          "fit",
+          [
+            "otimes",
+            [
+              "Ob",
+              "k-means"
+            ],
+            [
+              "Ob",
+              "data"
+            ]
+          ],
+          [
+            "Ob",
+            "k-means"
+          ]
+        ],
+        "label": {
+          "text": "fit"
+        }
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "source": "root",
+      "sourcePort": "in1",
+      "target": "n5",
+      "targetPort": "in1"
+    },
+    {
+      "id": "e2",
+      "source": "root",
+      "sourcePort": "in2",
+      "target": "n6",
+      "targetPort": "in2"
+    },
+    {
+      "id": "e3",
+      "source": "n3",
+      "sourcePort": "out1",
+      "target": "root",
+      "targetPort": "out1"
+    },
+    {
+      "id": "e4",
+      "source": "n4",
+      "sourcePort": "out1",
+      "target": "root",
+      "targetPort": "out2"
+    },
+    {
+      "id": "e5",
+      "source": "n5",
+      "sourcePort": "out1",
+      "target": "n6",
+      "targetPort": "in1"
+    },
+    {
+      "id": "e6",
+      "source": "n6",
+      "sourcePort": "out1",
+      "target": "n3",
+      "targetPort": "in1"
+    },
+    {
+      "id": "e7",
+      "source": "n6",
+      "sourcePort": "out1",
+      "target": "n4",
+      "targetPort": "in1"
+    }
+  ],
+  "id": "root",
+  "ports": [
+    {
+      "id": "in1",
+      "portkind": "input",
+      "properties": {
+        "label": {
+          "text": "integer"
+        },
+        "ob": [
+          "Ob",
+          "integer"
+        ]
+      }
+    },
+    {
+      "id": "in2",
+      "portkind": "input",
+      "properties": {
+        "label": {
+          "text": "array"
+        },
+        "ob": [
+          "Ob",
+          "array"
+        ]
+      }
+    },
+    {
+      "id": "out1",
+      "portkind": "output",
+      "properties": {
+        "label": {
+          "text": "array"
+        },
+        "ob": [
+          "Ob",
+          "array"
+        ]
+      }
+    },
+    {
+      "id": "out2",
+      "portkind": "output",
+      "properties": {
+        "label": {
+          "text": "vector"
+        },
+        "ob": [
+          "Ob",
+          "vector"
+        ]
+      }
+    }
+  ]
+}

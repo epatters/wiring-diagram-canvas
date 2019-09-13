@@ -1,0 +1,256 @@
+{
+  "_subgraph_cnt": 2,
+  "bb": "0,0,362,88",
+  "directed": true,
+  "edges": [
+    {
+      "_gvid": 0,
+      "arrowsize": "0.5",
+      "fontname": "Serif",
+      "head": 3,
+      "pos": "e,0.5,24.109 0.5,61.917 0.5,50.988 0.5,40.06 0.5,29.131",
+      "style": "invis",
+      "tail": 2
+    },
+    {
+      "_gvid": 1,
+      "arrowsize": "0.5",
+      "comment": "integer",
+      "fontname": "Serif",
+      "head": 8,
+      "headport": "in1:w",
+      "id": "e1",
+      "pos": "e,55,76 1,74 23.234,74 29.998,75.714 49.936,75.969",
+      "tail": 2,
+      "tailport": "e"
+    },
+    {
+      "_gvid": 2,
+      "arrowsize": "0.5",
+      "comment": "array",
+      "fontname": "Serif",
+      "head": 9,
+      "headport": "in2:w",
+      "id": "e2",
+      "pos": "e,157,30 1,12 69.021,12 86.339,29.098 151.79,29.966",
+      "tail": 3,
+      "tailport": "e"
+    },
+    {
+      "_gvid": 3,
+      "arrowsize": "0.5",
+      "fontname": "Serif",
+      "head": 5,
+      "pos": "e,361.5,24.188 361.5,59.673 361.5,49.601 361.5,39.528 361.5,29.455",
+      "style": "invis",
+      "tail": 4
+    },
+    {
+      "_gvid": 4,
+      "arrowsize": "0.5",
+      "comment": "array",
+      "fontname": "Serif",
+      "head": 4,
+      "headport": "w",
+      "id": "e3",
+      "pos": "e,361,72 307,72 329.22,72 336.01,72 355.94,72",
+      "tail": 6,
+      "tailport": "out1:e"
+    },
+    {
+      "_gvid": 5,
+      "arrowsize": "0.5",
+      "comment": "vector",
+      "fontname": "Serif",
+      "head": 5,
+      "headport": "w",
+      "id": "e4",
+      "pos": "e,361,12 307,12 329.22,12 336.01,12 355.94,12",
+      "tail": 7,
+      "tailport": "out1:e"
+    },
+    {
+      "_gvid": 6,
+      "arrowsize": "0.5",
+      "comment": "k-means",
+      "fontname": "Serif",
+      "head": 9,
+      "headport": "in1:w",
+      "id": "e5",
+      "pos": "e,157,54 103,76 127.09,76 130.66,56.985 151.87,54.311",
+      "tail": 8,
+      "tailport": "out1:e"
+    },
+    {
+      "_gvid": 7,
+      "arrowsize": "0.5",
+      "comment": "k-means",
+      "fontname": "Serif",
+      "head": 6,
+      "headport": "in1:w",
+      "id": "e6",
+      "pos": "e,259,72 205,42 230.63,42 231.54,68.148 253.89,71.621",
+      "tail": 9,
+      "tailport": "out1:e"
+    },
+    {
+      "_gvid": 8,
+      "arrowsize": "0.5",
+      "comment": "k-means",
+      "fontname": "Serif",
+      "head": 7,
+      "headport": "in1:w",
+      "id": "e7",
+      "pos": "e,259,12 205,42 230.63,42 231.54,15.852 253.89,12.379",
+      "tail": 9,
+      "tailport": "out1:e"
+    }
+  ],
+  "fontname": "Serif",
+  "name": "G",
+  "nodesep": "0.5",
+  "objects": [
+    {
+      "_gvid": 0,
+      "edges": [
+        0
+      ],
+      "fontname": "Serif",
+      "name": "%3",
+      "nodes": [
+        2,
+        3
+      ],
+      "nodesep": "0.5",
+      "pad": "0,0.333",
+      "rank": "source",
+      "rankdir": "TB",
+      "ranksep": "0.75"
+    },
+    {
+      "_gvid": 1,
+      "edges": [
+        3
+      ],
+      "fontname": "Serif",
+      "name": "%7",
+      "nodes": [
+        4,
+        5
+      ],
+      "nodesep": "0.5",
+      "pad": "0,0.333",
+      "rank": "sink",
+      "rankdir": "TB",
+      "ranksep": "0.75"
+    },
+    {
+      "_gvid": 2,
+      "fontname": "Serif",
+      "height": "0.33333",
+      "id": "in1",
+      "label": "",
+      "margin": "0",
+      "name": "n1p1",
+      "pos": "0.5,74",
+      "shape": "none",
+      "style": "invis",
+      "width": "0.013889"
+    },
+    {
+      "_gvid": 3,
+      "fontname": "Serif",
+      "height": "0.33333",
+      "id": "in2",
+      "label": "",
+      "margin": "0",
+      "name": "n1p2",
+      "pos": "0.5,12",
+      "shape": "none",
+      "style": "invis",
+      "width": "0.013889"
+    },
+    {
+      "_gvid": 4,
+      "fontname": "Serif",
+      "height": "0.33333",
+      "id": "out1",
+      "label": "",
+      "margin": "0",
+      "name": "n2p1",
+      "pos": "361.5,72",
+      "shape": "none",
+      "style": "invis",
+      "width": "0.013889"
+    },
+    {
+      "_gvid": 5,
+      "fontname": "Serif",
+      "height": "0.33333",
+      "id": "out2",
+      "label": "",
+      "margin": "0",
+      "name": "n2p2",
+      "pos": "361.5,12",
+      "shape": "none",
+      "style": "invis",
+      "width": "0.013889"
+    },
+    {
+      "_gvid": 6,
+      "comment": "k-means-centroids",
+      "fontname": "Serif",
+      "height": "0.33333",
+      "id": "n3",
+      "label": "<TABLE BORDER=\"0\" CELLPADDING=\"0\" CELLSPACING=\"0\">\n<TR>\n<TD><TABLE BORDER=\"0\" CELLPADDING=\"0\" CELLSPACING=\"0\"><TR><TD HEIGHT=\"24\" WIDTH=\"0\" PORT=\"in1\"></TD></TR></TABLE></TD>\n<TD BORDER=\"1\" CELLPADDING=\"4\" WIDTH=\"48\"></TD>\n<TD><TABLE BORDER=\"0\" CELLPADDING=\"0\" CELLSPACING=\"0\"><TR><TD HEIGHT=\"24\" WIDTH=\"0\" PORT=\"out1\"></TD></TR></TABLE></TD>\n</TR>\n</TABLE>",
+      "margin": "0",
+      "name": "n3",
+      "pos": "283,72",
+      "shape": "none",
+      "width": "0.66667"
+    },
+    {
+      "_gvid": 7,
+      "comment": "clustering-model-clusters",
+      "fontname": "Serif",
+      "height": "0.33333",
+      "id": "n4",
+      "label": "<TABLE BORDER=\"0\" CELLPADDING=\"0\" CELLSPACING=\"0\">\n<TR>\n<TD><TABLE BORDER=\"0\" CELLPADDING=\"0\" CELLSPACING=\"0\"><TR><TD HEIGHT=\"24\" WIDTH=\"0\" PORT=\"in1\"></TD></TR></TABLE></TD>\n<TD BORDER=\"1\" CELLPADDING=\"4\" WIDTH=\"48\"></TD>\n<TD><TABLE BORDER=\"0\" CELLPADDING=\"0\" CELLSPACING=\"0\"><TR><TD HEIGHT=\"24\" WIDTH=\"0\" PORT=\"out1\"></TD></TR></TABLE></TD>\n</TR>\n</TABLE>",
+      "margin": "0",
+      "name": "n4",
+      "pos": "283,12",
+      "shape": "none",
+      "width": "0.66667"
+    },
+    {
+      "_gvid": 8,
+      "comment": "k-means",
+      "fontname": "Serif",
+      "height": "0.33333",
+      "id": "n5",
+      "label": "<TABLE BORDER=\"0\" CELLPADDING=\"0\" CELLSPACING=\"0\">\n<TR>\n<TD><TABLE BORDER=\"0\" CELLPADDING=\"0\" CELLSPACING=\"0\"><TR><TD HEIGHT=\"24\" WIDTH=\"0\" PORT=\"in1\"></TD></TR></TABLE></TD>\n<TD BORDER=\"1\" CELLPADDING=\"4\" WIDTH=\"48\"></TD>\n<TD><TABLE BORDER=\"0\" CELLPADDING=\"0\" CELLSPACING=\"0\"><TR><TD HEIGHT=\"24\" WIDTH=\"0\" PORT=\"out1\"></TD></TR></TABLE></TD>\n</TR>\n</TABLE>",
+      "margin": "0",
+      "name": "n5",
+      "pos": "79,76",
+      "shape": "none",
+      "width": "0.66667"
+    },
+    {
+      "_gvid": 9,
+      "comment": "fit",
+      "fontname": "Serif",
+      "height": "0.66667",
+      "id": "n6",
+      "label": "<TABLE BORDER=\"0\" CELLPADDING=\"0\" CELLSPACING=\"0\">\n<TR>\n<TD><TABLE BORDER=\"0\" CELLPADDING=\"0\" CELLSPACING=\"0\"><TR><TD HEIGHT=\"24\" WIDTH=\"0\" PORT=\"in1\"></TD></TR><TR><TD HEIGHT=\"24\" WIDTH=\"0\" PORT=\"in2\"></TD></TR></TABLE></TD>\n<TD BORDER=\"1\" CELLPADDING=\"4\" WIDTH=\"48\"></TD>\n<TD><TABLE BORDER=\"0\" CELLPADDING=\"0\" CELLSPACING=\"0\"><TR><TD HEIGHT=\"24\" WIDTH=\"0\" PORT=\"out1\"></TD></TR></TABLE></TD>\n</TR>\n</TABLE>",
+      "margin": "0",
+      "name": "n6",
+      "pos": "181,42",
+      "shape": "none",
+      "width": "0.66667"
+    }
+  ],
+  "pad": "0,0.5",
+  "rankdir": "LR",
+  "ranksep": "0.75",
+  "strict": false
+}
