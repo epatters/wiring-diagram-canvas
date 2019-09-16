@@ -1,12 +1,14 @@
 {
   "name": "wiring-diagram-canvas",
-  "version": "0.1.0",
+  "version": "0.1.1-0",
   "description": "Wiring diagrams in HTML canvas",
   "author": "Evan Patterson <evan@epatters.org> (https://www.epatters.org)",
   "license": "Apache-2.0",
   "main": "./lib/src/index.js",
   "types": "./lib/src/index.d.ts",
-  "files": [ "lib/**/*" ],
+  "files": [
+    "lib/**/*"
+  ],
   "scripts": {
     "build": "./node_modules/typescript/bin/tsc",
     "prepublishOnly": "./node_modules/typescript/bin/tsc",
