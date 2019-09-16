@@ -2,7 +2,7 @@
   "name": "wiring-diagram-canvas",
   "version": "0.1.0",
   "description": "Wiring diagrams in HTML canvas",
-  "author": "Evan Patterson",
+  "author": "Evan Patterson <evan@epatters.org> (https://www.epatters.org)",
   "license": "Apache-2.0",
   "main": "./lib/src/index.js",
   "types": "./lib/src/index.d.ts",
