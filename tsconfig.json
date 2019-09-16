@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
-    "outDir": "./build/",
+    "outDir": "./lib/",
+    "declaration": true,
     "sourceMap": false,
     "noImplicitAny": true,
     "resolveJsonModule": true,
@@ -9,7 +10,6 @@
     "jsx": "react"
   },
   "include": [
-    "./examples/**/*",
     "./src/**/*"
   ]
 }

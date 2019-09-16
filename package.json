@@ -2,11 +2,14 @@
   "name": "wiring-diagram-canvas",
   "version": "0.1.0",
   "description": "Wiring diagrams in HTML canvas",
-  "main": "index.js",
   "author": "Evan Patterson",
   "license": "Apache-2.0",
-  "private": true,
+  "main": "./lib/src/index.js",
+  "types": "./lib/src/index.d.ts",
+  "files": [ "lib/**/*" ],
   "scripts": {
+    "build": "./node_modules/typescript/bin/tsc",
+    "prepublishOnly": "./node_modules/typescript/bin/tsc",
     "test": "./node_modules/mocha/bin/mocha -r ts-node/register ./test/**/*.ts"
   },
   "peerDependencies": {

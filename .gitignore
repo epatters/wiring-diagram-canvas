@@ -3,7 +3,7 @@
 
 # JavaScript
 bundle.js
-build/
+lib/
 node_modules/
 npm-debug.log
 yalc.lock
