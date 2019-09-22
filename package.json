@@ -4,6 +4,7 @@
   "description": "Wiring diagrams in HTML canvas",
   "author": "Evan Patterson <evan@epatters.org> (https://www.epatters.org)",
   "license": "Apache-2.0",
+  "repository": "github:epatters/wiring-diagram-canvas",
   "main": "./lib/src/index.js",
   "types": "./lib/src/index.d.ts",
   "files": [
@@ -15,7 +16,7 @@
     "test": "./node_modules/mocha/bin/mocha -r ts-node/register ./test/**/*.ts"
   },
   "peerDependencies": {
-    "konva": "^4.0.9",
+    "konva": "^4.0.12",
     "lodash": "^4.17.15",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
@@ -28,7 +29,7 @@
     "@types/node": "^11.10.6",
     "@types/react": "^16.9.2",
     "@types/react-dom": "^16.9.0",
-    "konva": "^4.0.9",
+    "konva": "^4.0.12",
     "lodash": "^4.17.15",
     "mocha": "^6.2.0",
     "react": "^16.9.0",

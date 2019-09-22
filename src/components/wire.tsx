@@ -42,8 +42,7 @@ export class Wire extends React.Component<WireProps,WireState> {
   updatePath() {
     // Get positions of source and target ports, relative to the parent group.
     const { source, sourcePort, target, targetPort } = this.props;
-    const diagram = this.path.parent.findAncestor(
-      "Group", undefined, undefined) as Konva.Group;
+    const diagram = this.path.parent.findAncestor("Group") as Konva.Group;
     const sourceNode = diagram.findOne(`.${source}:${sourcePort}`);
     const targetNode = diagram.findOne(`.${target}:${targetPort}`);
     const start = sourceNode.getAbsolutePosition(diagram);

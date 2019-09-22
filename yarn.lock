@@ -483,10 +483,10 @@ json5@^1.0.1:
   dependencies:
     minimist "^1.2.0"
 
-konva@^4.0.9:
-  version "4.0.9"
-  resolved "https://registry.yarnpkg.com/konva/-/konva-4.0.9.tgz#0f90d8aa067d74c4ffe2887a13465b9230c98f06"
-  integrity sha512-ON2zKhMjdNGFT2H92rR6fowagfXz/1X1tfx/LqgNB1UVuaB6HIhFSLBhGoLem7psxUaKOHAO5g1Hlp1vdOXrJg==
+konva@^4.0.12:
+  version "4.0.12"
+  resolved "https://registry.yarnpkg.com/konva/-/konva-4.0.12.tgz#16e8fda5f14768d35d59d8b2d195b552b15c4572"
+  integrity sha512-/z8bSJEHiMMtMJjLZgUWN098l/6GHJFupZqNFmSP2ru0sUuaeQo4PKyvIgI4Z8caeTP+oxP6FC0Pbghn8uTM9Q==
 
 lcid@^2.0.0:
   version "2.0.0"
